@@ -3,8 +3,21 @@
 
 #include "mamachdep.h"
 
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+// #define KB_DEBUG_ENABLED
+
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+
+#ifdef KB_DEBUG_ENABLED
+
+// log buffer size
 #define LOG_ENTRIES_MAX 14400
 
+
+// log buffer entry structure
 #pragma pack(1)
 // 4 bytes
 typedef struct
@@ -15,6 +28,7 @@ typedef struct
 } YMU262_LOG_ENTRY;
 #pragma pack()
 
+// log entry type definitions
 typedef enum
 {
     LOGMA3_RESET = 0,
@@ -73,12 +87,23 @@ typedef enum
     LOGMA3_STREAM_HANDLER,
 } MA3LogFlag_Type;
 
+//---------------------------------------------------------------------------------------------------------------------------------------------------
 
-void AddToBuffer(int isRead, int isData, UINT8 bVal );
+void AddToBuffer(int isRead, int isData, UINT8 bVal);
 void AddToBuffer_SpecialFlag(MA3LogFlag_Type bSpecialFlag);
 
 void setTickFirst(UINT32 tickFirstParam);
 void dumpToUsb(void);
+
+#else // #ifdef KB_DEBUG_ENABLED
+
+#define AddToBuffer(isRead, isData, bVal)
+#define AddToBuffer_SpecialFlag(bSpecialFlag)
+
+#define setTickFirst(tickFirstParam)
+#define dumpToUsb()
+
+#endif // #ifdef KB_DEBUG_ENABLED
 
 #endif /* KB_DEBUG_H_INCLUDED */
 

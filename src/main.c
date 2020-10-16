@@ -24,9 +24,11 @@ extern void MaDevDrv_IntHandler(void);
 
 #define YMU762_RST(x) HAL_GPIO_WritePin(GPIOB, GPIO_PIN_11, GPIO_PIN_##x)
 
-#define PAUSE HAL_GPIO_ReadPin(GPIOA,GPIO_PIN_0)
+// macros for GPIO access (button press checking/LEDs on/off)
+#define BUTTON_PRESSED HAL_GPIO_ReadPin(GPIOA,GPIO_PIN_0)
+#define LED(color,op) HAL_GPIO_WritePin(GPIOD, LED_##color##_Pin, GPIO_PIN_##op)
 
-#define LED(x) HAL_GPIO_WritePin(GPIOD, GPIO_PIN_12, GPIO_PIN_##x)
+
 
 
 void delay_ms(volatile uint32_t d)
@@ -42,40 +44,36 @@ void YMU762_Reset(void)
     delay_ms(1);
 }
 
-
-void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+void toggle_GREEN_LED()
 {
     static uint8_t t=0;
-
-    /* Prevent unused argument(s) compilation warning */
-    UNUSED(GPIO_Pin);
-
-    MaDevDrv_IntHandler();
 
     t^=1;
 
     if(t) {
-        LED(SET);
+        LED(GREEN,SET);
     } else {
-       LED(RESET);
+       LED(GREEN,RESET);
     }
-
 }
 
 
 signed long CallBack(unsigned char id)
 {
- /*
- switch(id)
- {
-  case MASMW_REPEAT:
-  break;
-  case MASMW_END_OF_SEQUENCE:
-  break;
-  default:
-  break;
- }
- */
+
+    switch(id)
+    {
+        case MASMW_REPEAT:
+            while(! BUTTON_PRESSED) {};
+            break;
+
+        case MASMW_END_OF_SEQUENCE:
+            break;
+
+        default:
+            break;
+    }
+
  return MASMW_SUCCESS;
 }
 
@@ -101,7 +99,7 @@ int main(void)
     AddToBuffer_SpecialFlag(LOGMA3_RESET);
     YMU762_Reset();
 
-    while(! PAUSE);
+    while(! BUTTON_PRESSED);
 
     AddToBuffer_SpecialFlag(LOGMA3_SOUND_INITIALIZE);
     MaSound_Initialize();
@@ -133,7 +131,7 @@ int main(void)
     setTickFirst(HAL_GetTick());
 
     AddToBuffer_SpecialFlag(LOGMA3_START);
-    MaSound_Start(func,file,1,NULL);    // Play once, loop -> change play_mode to 0
+    MaSound_Start(func,file,0,NULL);    // Play once, loop -> change play_mode to 0
 
     while(1)
     {
@@ -226,14 +224,14 @@ static void MX_GPIO_Init(void)
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(nRST_GPIO_Port, nRST_Pin, GPIO_PIN_SET);
 
-  /*Configure LED pin Output Level */
-  HAL_GPIO_WritePin(LED_GPIO_Port, LED_Pin, GPIO_PIN_RESET);
+  /*Configure LEDs pin Output Level */
+  HAL_GPIO_WritePin(GPIOD, LED_GREEN_Pin|LED_ORANGE_Pin, GPIO_PIN_RESET);
 
-  /*Configure GPIO pin : PUSHBUTT_Pin */
-  GPIO_InitStruct.Pin = PUSHBUTT_Pin;
+  /*Configure GPIO pin : BUTTON_Pin */
+  GPIO_InitStruct.Pin = BUTTON_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
-  HAL_GPIO_Init(PUSHBUTT_GPIO_Port, &GPIO_InitStruct);
+  HAL_GPIO_Init(BUTTON_GPIO_Port, &GPIO_InitStruct);
 
   /*Configure GPIO pin : nIRQ_Pin */
   GPIO_InitStruct.Pin = nIRQ_Pin;
@@ -248,12 +246,12 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
   HAL_GPIO_Init(nRST_GPIO_Port, &GPIO_InitStruct);
 
-  /*Configure GPIO pin : LED_Pin */
-  GPIO_InitStruct.Pin = LED_Pin;
+  /*Configure GPIO pin : LED pins */
+  GPIO_InitStruct.Pin = LED_GREEN_Pin|LED_ORANGE_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
-  HAL_GPIO_Init(LED_GPIO_Port, &GPIO_InitStruct);
+  HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
 
   /* EXTI interrupt init*/
   HAL_NVIC_SetPriority(EXTI0_IRQn, 0, 0);

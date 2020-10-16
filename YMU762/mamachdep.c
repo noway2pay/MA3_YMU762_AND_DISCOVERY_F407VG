@@ -38,12 +38,8 @@ void machdep_memcpy( UINT8 *dst_ptr, UINT8 *src_ptr, UINT32 size )
  ****************************************************************************/
 void machdep_Wait( UINT32 wait_time )
 {
-#if 1
-  volatile UINT32 d=(wait_time*100)/1000; //ns
-  while(d--);
-#else
-    HAL_Delay(1);
-#endif
+    HAL_Delay(wait_time);
+
 }
 /****************************************************************************
  *	machdep_WriteStatusFlagReg

@@ -59,8 +59,14 @@
 
 /* Private define ------------------------------------------------------------*/
 
-#define PUSHBUTT_Pin GPIO_PIN_0
-#define PUSHBUTT_GPIO_Port GPIOA
+#define BUTTON_Pin GPIO_PIN_0
+#define BUTTON_GPIO_Port GPIOA
+
+#define LED_GREEN_Pin GPIO_PIN_12
+#define LED_GREEN_GPIO_Port GPIOD
+#define LED_ORANGE_Pin GPIO_PIN_13
+#define LED_ORANGE_GPIO_Port GPIOD
+
 #define nIRQ_Pin GPIO_PIN_0
 #define nIRQ_GPIO_Port GPIOB
 #define nIRQ_EXTI_IRQn EXTI0_IRQn
@@ -91,8 +97,6 @@
 #define YMU_nCS_Pin GPIO_PIN_7
 #define YMU_nCS_GPIO_Port GPIOD
 
-#define LED_Pin GPIO_PIN_12
-#define LED_GPIO_Port GPIOD
 
 
 /* ########################## Assert Selection ############################## */

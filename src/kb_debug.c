@@ -1,17 +1,26 @@
 #include "kb_debug.h"
+
+#ifdef KB_DEBUG_ENABLED
+
 #include "usbd_cdc_if.h"
 
-#define USB_OUT_PACKET_MAX 512
-#define SINGLE_LOG_ENTRY 13
-
-// -10 because of the "timestamp:" preamble
-#define NR_OF_LOG_ENTRIES_IN_PACKET_MAX ((USB_OUT_PACKET_MAX - SINGLE_LOG_ENTRY - 1)/SINGLE_LOG_ENTRY)
+//---------------------------------------------------------------------------------------------------------------------------------------------------
 
 // log buffer
 YMU262_LOG_ENTRY logbuf[LOG_ENTRIES_MAX];
 // log buffer's variables
 volatile UINT32 ulPos = 0;
 volatile UINT32 ulCount = 0;
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+
+// USB register/operation dump related stuff
+
+#define USB_OUT_PACKET_MAX 512
+#define SINGLE_LOG_ENTRY 13
+
+// -10 because of the "timestamp:" preamble
+#define NR_OF_LOG_ENTRIES_IN_PACKET_MAX ((USB_OUT_PACKET_MAX - SINGLE_LOG_ENTRY - 1)/SINGLE_LOG_ENTRY)
 
 
 int nLen = 0;
@@ -26,6 +35,9 @@ int thisChunk = 0;
 char strTmp[USB_OUT_PACKET_MAX] = { 0, };
 uint32_t CDC_requests_sent = 0;
 
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+
+// store access to data/command register (both write and read); try to compress multiple accesses (e.g. waiting for some flag)
 
 void AddToBuffer(int isRead, int isData, UINT8 bVal )
 {
@@ -66,6 +78,10 @@ void AddToBuffer(int isRead, int isData, UINT8 bVal )
     ulCount++;
 }
 
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+
+// store special operation
+
 void AddToBuffer_SpecialFlag(MA3LogFlag_Type bSpecialFlag)
 {
 
@@ -94,10 +110,18 @@ void AddToBuffer_SpecialFlag(MA3LogFlag_Type bSpecialFlag)
     ulCount++;
 }
 
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+
+// helper function, just to have the first tick correct ;)
 void setTickFirst(uint32_t tickFirstParam)
 {
     tickFirst = tickFirstParam;
 }
+
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+
+// called in the loop, will be pushing the data collected (since the last time this was called) to USB, in HEX-ASCII form (+CR) per log entry
 
 void dumpToUsb(void)
 {
@@ -167,3 +191,5 @@ void dumpToUsb(void)
 
     lastPos = firstPos;
 }
+
+#endif
