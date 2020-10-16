@@ -66,6 +66,8 @@
 #define LED_GREEN_GPIO_Port GPIOD
 #define LED_ORANGE_Pin GPIO_PIN_13
 #define LED_ORANGE_GPIO_Port GPIOD
+// other LEDs are conflicting with FSMC !
+
 
 #define nIRQ_Pin GPIO_PIN_0
 #define nIRQ_GPIO_Port GPIOB

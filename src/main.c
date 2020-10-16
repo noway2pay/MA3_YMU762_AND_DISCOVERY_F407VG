@@ -64,7 +64,9 @@ signed long CallBack(unsigned char id)
     switch(id)
     {
         case MASMW_REPEAT:
+            LED(ORANGE,SET);
             while(! BUTTON_PRESSED) {};
+            LED(ORANGE,RESET);
             break;
 
         case MASMW_END_OF_SEQUENCE:
@@ -76,6 +78,20 @@ signed long CallBack(unsigned char id)
 
  return MASMW_SUCCESS;
 }
+
+// IRQ handler
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+{
+    static uint8_t t=0;
+
+    /* Prevent unused argument(s) compilation warning */
+    UNUSED(GPIO_Pin);
+
+    MaDevDrv_IntHandler();
+
+    toggle_GREEN_LED();
+}
+
 
 
 int32_t func = 0;
@@ -135,7 +151,7 @@ int main(void)
 
     while(1)
     {
-        dumpToUsb();
+        // dumpToUsb();
     }
 }
 
@@ -250,7 +266,7 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pin = LED_GREEN_Pin|LED_ORANGE_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
-  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
   HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
 
   /* EXTI interrupt init*/

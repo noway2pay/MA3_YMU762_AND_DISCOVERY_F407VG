@@ -54,7 +54,7 @@
 	"stm32f4xx_hal_dfsdm.h"
 	"stm32f4xx_hal_lptim.h"
 
-1602886609 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\inc\main.h
+1602889716 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\inc\main.h
 
 1537557065 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\drivers\stm32f4xx_hal_driver\inc\stm32f4xx_hal_rcc.h
 	"stm32f4xx_hal_def.h"
@@ -296,11 +296,11 @@
 1537557068 source:f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\middlewares\st\stm32_usb_device_library\core\src\usbd_ioreq.c
 	"usbd_ioreq.h"
 
-1602882464 source:f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\src\kb_debug.c
+1602888381 source:f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\src\kb_debug.c
 	"kb_debug.h"
 	"usbd_cdc_if.h"
 
-1602886207 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\inc\kb_debug.h
+1602890354 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\inc\kb_debug.h
 	"mamachdep.h"
 
 1602876038 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\ymu762\mamachdep.h
@@ -402,7 +402,7 @@
 
 1051002462 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\ymu762\mammfcnv.h
 
-1602886955 source:f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\ymu762\mamachdep.c
+1602890407 source:f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\ymu762\mamachdep.c
 	"mamachdep.h"
 	"madefs.h"
 	"kb_debug.h"
@@ -482,7 +482,7 @@
 1050997634 source:f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\ymu762\mawavcnv.c
 	"mawavcnv.h"
 
-1602887493 source:f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\src\main.c
+1602890363 source:f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\src\main.c
 	"main.h"
 	"stm32f4xx_hal.h"
 	"usb_device.h"
@@ -492,5 +492,5 @@
 	"masound.h"
 	"MMF.h"
 
-1602885959 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\mmf\mmf.h
+1602890462 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\mmf\mmf.h
 
