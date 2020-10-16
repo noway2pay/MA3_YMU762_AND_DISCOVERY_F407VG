@@ -15,6 +15,7 @@ Modefied by Kenny to support both MA-3 and  MA-3L2
 
 #include "mamachdep.h"
 #include "madefs.h"
+#include "kb_debug.h"
 
 extern void delay_ms(volatile unsigned long int d);
 
@@ -54,71 +55,7 @@ void machdep_Wait( UINT32 wait_time )
  *	Return:
  *			None
  *
- ****************************************************************************/
-
-UINT32 ulPos = 0;
-UINT32 ulCount = 0;
-
-#if 1
-YMU262_LOG_ENTRY logbuf[LOG_ENTRIES_MAX];
-#endif
-
-#if 0
-// initial implementation, needs some improvements
-void AddToBuffer(int isRead, int isData, UINT8 bVal )
-{
-    UINT8 flag = (isRead ? 1 : 0) | (isData ? 2 : 0);
-
-    // if repeat (e.g. read status - with the same data returned)
-    if(((logbuf[ulPos].flag & 0x7F) == flag) && (logbuf[ulPos].data == bVal))
-    {
-        logbuf[ulPos].ushCnt = (UINT16) (ulCount & 0xFFFF);
-        logbuf[ulPos].flag = flag | 128;    // mark repeat
-    }
-    else
-    {
-        logbuf[ulPos].ushCnt = (UINT16) (ulCount & 0xFFFF);
-        logbuf[ulPos].flag = flag;
-        logbuf[ulPos].data = bVal;
-        ulPos++;
-    }
-
-    ulCount++;
-
-    if(ulPos >= LOG_ENTRIES_MAX)
-    {
-        ulPos = 0;
-    }
-}
-#else
-void AddToBuffer(int isRead, int isData, UINT8 bVal )
-{
-    UINT8 flag = (isRead ? 1 : 0) | (isData ? 2 : 0);
-
-    // if repeat (e.g. read status - with the same data returned)
-    if(((logbuf[ulPos].flag & 0x7F) == flag) && (logbuf[ulPos].data == bVal))
-    {
-        logbuf[ulPos].ushCnt = (UINT16) (ulCount & 0xFFFF);
-        logbuf[ulPos].flag = flag | 128;    // mark repeat
-    }
-    else
-    {
-        logbuf[ulPos].ushCnt = (UINT16) (ulCount & 0xFFFF);
-        logbuf[ulPos].flag = flag;
-        logbuf[ulPos].data = bVal;
-        ulPos++;
-    }
-
-    ulCount++;
-
-    if(ulPos >= LOG_ENTRIES_MAX)
-    {
-        ulPos = 0;
-    }
-}
-#endif
-
-
+*************************************************************************/
 void machdep_WriteStatusFlagReg( UINT8	data )
 {
 	/*----------------------------------------------------------------------*
@@ -223,6 +160,8 @@ SINT32 machdep_CheckStatus( UINT8 flag )
 {
 	UINT8	read_data;
 
+	AddToBuffer_SpecialFlag(LOGMA3_CHECK_STATUS);
+
 	do
 	{
 		read_data = machdep_ReadStatusFlagReg();
@@ -255,6 +194,8 @@ SINT32 machdep_CheckStatus( UINT8 flag )
 SINT32 machdep_WaitValidData( UINT8 flag )
 {
 	UINT8	read_data;
+
+	AddToBuffer_SpecialFlag(LOGMA3_WAIT_VALID_DATA);
 
 	do
 	{
@@ -298,6 +239,8 @@ SINT32 machdep_CheckDelayedFifoEmpty( void )
 {
 	UINT32 flag;
 
+	AddToBuffer_SpecialFlag(LOGMA3_CHECK_DELAYED_FIFO_EMPTY);
+
 	flag = 0;
 	if( machdep_ReadStatusFlagReg()&MA_EMP_DW ) flag |= 0x01;
 	if( machdep_ReadStatusFlagReg()&MA_EMP_DW ) flag |= 0x02;
@@ -327,6 +270,8 @@ SINT32 machdep_CheckDelayedFifoEmpty( void )
 SINT32 machdep_WaitDelayedFifoEmpty( void )
 {
 	UINT32 read_data;
+
+	AddToBuffer_SpecialFlag(LOGMA3_WAIT_DELAYED_FIFO_EMPTY);
 
 	do
 	{
@@ -361,6 +306,8 @@ SINT32 machdep_WaitDelayedFifoEmpty( void )
 SINT32 machdep_WaitImmediateFifoEmpty( void )
 {
 	UINT8 read_data;
+
+    AddToBuffer_SpecialFlag(LOGMA3_WAIT_IMMEDIATE_FIFO_EMPTY);
 
 	do
 	{

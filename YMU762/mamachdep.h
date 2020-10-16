@@ -20,20 +20,6 @@
 #define UINT16 unsigned short
 #define UINT32 unsigned long
 
-///////////////////////////////////////////////////
-#pragma pack(1)
-// 4 bytes
-typedef struct
-{
-    UINT16 ushCnt;
-    UINT8 flag;
-    UINT8 data;
-} YMU262_LOG_ENTRY;
-#pragma pack()
-
-#define LOG_ENTRIES_MAX 8192
-///////////////////////////////////////////////////
-
 #ifndef NULL
  #define  NULL           ((void *)0)
 #endif
@@ -50,6 +36,7 @@ typedef struct
 #define	MA_PLL_OUT		(55298)	/* PLL Output value (kHz) ex.:55296 */
 									/* (CLKI / MA3_ADJUST1_VALUE) * MA3_ADJUST2_VALUE */
 #else
+// for 12.228 MHz generator
 #define	MA_ADJUST1_VALUE	(2)	/* register bank 1, ID #5 */
 #define	MA_ADJUST2_VALUE	(9)	/* register bank 1, ID #6 */
 #define	MA_PLL_OUT		(55296)	/* PLL Output value (kHz) ex.:55296 */

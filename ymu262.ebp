@@ -182,6 +182,7 @@
 		<Unit filename="Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_ll_usb.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="inc\kb_debug.h" />
 		<Unit filename="inc\main.h" />
 		<Unit filename="inc\stm32f4xx_hal_conf.h" />
 		<Unit filename="inc\stm32f4xx_it.h" />
@@ -208,6 +209,9 @@
 		</Unit>
 		<Unit filename="MMF\MMF.h" />
 		<Unit filename="readme.txt" />
+		<Unit filename="src\kb_debug.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="src\main.c">
 			<Option compilerVar="CC" />
 		</Unit>

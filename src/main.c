@@ -2,8 +2,9 @@
 #include "main.h"
 #include "stm32f4xx_hal.h"
 #include "usb_device.h"
+#include "usbd_cdc_if.h"
 
-
+#include "kb_debug.h"
 
 #include "mamachdep.h"
 #include "masound.h"
@@ -18,10 +19,6 @@ void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_FSMC_Init(void);
 
-#if 1
-extern UINT32 ulPos;
-extern YMU262_LOG_ENTRY logbuf[LOG_ENTRIES_MAX];
-#endif
 
 extern void MaDevDrv_IntHandler(void);
 
@@ -82,31 +79,7 @@ signed long CallBack(unsigned char id)
  return MASMW_SUCCESS;
 }
 
-extern UINT32 ulCount;
-extern UINT32 ulCountRdSt;
-extern UINT32 ulCountRdDa;
-extern UINT32 ulCountWrSt;
-extern UINT32 ulCountWrDa;
 
-extern UINT32 ulCountNonRep;
-extern UINT32 ulPos;
-
-
-#define USB_OUT_PACKET_MAX 512
-#define SINGLE_LOG_ENTRY 13
-
-// -10 because of the "timestamp:" preamble
-#define NR_OF_LOG_ENTRIES_IN_PACKET_MAX ((USB_OUT_PACKET_MAX - SINGLE_LOG_ENTRY - 1)/SINGLE_LOG_ENTRY)
-
-char strTmp[USB_OUT_PACKET_MAX];
-int nLen = 0;
-int delta = 0;
-uint32_t lastPos = 0;
-uint32_t firstPos = 0;
-uint32_t tickNow = 0;
-uint32_t tickFirst = 0;
-int thisChunk = 0;
-uint32_t CDC_requests_sent = 0;
 int32_t func = 0;
 int32_t file = 0;
 uint8_t volume = 0;
@@ -125,107 +98,46 @@ int main(void)
     MX_USB_DEVICE_Init();
     MX_FSMC_Init();
 
+    AddToBuffer_SpecialFlag(LOGMA3_RESET);
     YMU762_Reset();
 
     while(! PAUSE);
 
+    AddToBuffer_SpecialFlag(LOGMA3_SOUND_INITIALIZE);
     MaSound_Initialize();
 
+    AddToBuffer_SpecialFlag(LOGMA3_HP_VOLUME);
     MaSound_DeviceControl(MASMW_HP_VOLUME, 0, 31, 31);
+
+    AddToBuffer_SpecialFlag(LOGMA3_EQ_VOLUME);
     MaSound_DeviceControl(MASMW_EQ_VOLUME, 0, 0, 0);
+
+    AddToBuffer_SpecialFlag(LOGMA3_SP_VOLUME);
     MaSound_DeviceControl(MASMW_SP_VOLUME, 0, 0, 0);
 
-    func=MaSound_Create(MASMW_CNVID_MMF /*MASMW_CNVID_MID*/);
+    // MMF header: MMMD @ 0x0000
+    // MIDI header: MTHd @ 0x0000
+    func=MaSound_Create((MMF[1] == 'M') ? MASMW_CNVID_MMF : MASMW_CNVID_MID);
+
     file=MaSound_Load(func, (uint8_t*)MMF, sizeof(MMF), 1, CallBack, NULL);
 
     MaSound_Open(func,file,0,NULL);
 
+    AddToBuffer_SpecialFlag(LOGMA3_SET_VOLUME);
     volume=127; //Max 0 dB
     MaSound_Control(func,file,MASMW_SET_VOLUME,&volume,NULL);
 
+    AddToBuffer_SpecialFlag(LOGMA3_STANDBY);
     MaSound_Standby(func,file,NULL);
 
-    uint32_t tickFirst = HAL_GetTick();
+    setTickFirst(HAL_GetTick());
 
-    MaSound_Start(func,file,0,NULL); //Play Loop
+    AddToBuffer_SpecialFlag(LOGMA3_START);
+    MaSound_Start(func,file,1,NULL);    // Play once, loop -> change play_mode to 0
 
     while(1)
     {
-        firstPos = ulPos;                                                   // current log position (from mamachdep.c)
-
-        if(firstPos >= lastPos)                                             // some new samples stored (no boundary crossed)
-            delta = firstPos - lastPos;
-        else
-            delta = LOG_ENTRIES_MAX - lastPos + firstPos;                   // boundary crossed
-
-
-        // if TX busy or no data to be sent - check again in 1 ms
-        if( (CDC_CheckTransmitPossible() == USBD_BUSY) || (delta == 0) )
-        {
-            //delay_ms(1);
-            continue;
-        }
-
-        tickNow = HAL_GetTick();
-        nLen = sprintf(strTmp, ":%08X\r", tickNow - tickFirst);
-
-        thisChunk = MIN(delta, NR_OF_LOG_ENTRIES_IN_PACKET_MAX);
-
-        while(delta > 0)
-        {
-            for(int i=0; i< thisChunk; i++)
-            {
-                nLen += sprintf(strTmp + nLen,"%04X%04X%02X%02X\r", firstPos, logbuf[firstPos].ushCnt, logbuf[firstPos].flag, logbuf[firstPos].data);
-
-                firstPos++;
-                if(firstPos >= LOG_ENTRIES_MAX)
-                {
-                    firstPos = 0;
-                }
-            }
-
-            CDC_Transmit_FS(strTmp,nLen);
-
-            nLen = 0;
-
-            while( CDC_CheckTransmitPossible() == USBD_BUSY )
-            {
-                //delay_ms(1);
-            }
-
-            CDC_requests_sent++;
-
-            delta -= thisChunk;
-        }
-
-
-        lastPos = firstPos;
-
-/*
-        if(PAUSE)
-        {
-            MaSound_Pause(func,file,NULL);
-
-            {
-                uint32_t tickNow = HAL_GetTick();
-                char strTmp[128];
-                int nLen;
-                //nLen = sprintf(strTmp,"T:%d, C-TOT:%d RD-ST:%d RD-DA:%d WR-ST:%d WR-DA:%d\r", tickNow-tickFirst, ulCount, ulCountRdSt, ulCountRdDa, ulCountWrSt, ulCountWrDa);
-                nLen = sprintf(strTmp,"T:%d, C-TOT:%d C-NONR:%d\r", tickNow-tickFirst, ulCount, ulCountNonRep);
-                CDC_Transmit_FS(strTmp,nLen);
-            }
-
-            delay_ms(100);
-            while(PAUSE);
-            delay_ms(100);
-            while(!PAUSE);
-            delay_ms(100);
-            while(PAUSE);
-            delay_ms(100);
-
-            MaSound_Restart(func,file,NULL);
-        }
-*/
+        dumpToUsb();
     }
 }
 
