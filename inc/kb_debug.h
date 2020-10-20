@@ -16,6 +16,13 @@
 // log buffer size
 #define LOG_ENTRIES_MAX 100
 
+// Yamaha's debug FIFO size
+#define YAM_DEBUG_SIZE 55000
+
+// Yamaha's debug single line size MAX
+#define YAM_DEBUG_SINGLE_LINE_SIZE 128
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------
 
 // log buffer entry structure
 #pragma pack(1)
@@ -93,11 +100,18 @@ void AddEventToBuffer(int isRead, int isData, UINT8 bVal);
 void AddEventToBuffer_SpecialFlag(MA3LogFlag_Type bSpecialFlag);
 
 void setTickFirst(UINT32 tickFirstParam);
+
 void dumpEventsToUsb(void);
 void dumpYamDebugToUsb(void);
 
+void yamDebugPutSimpleLine(char * lineData);
+
 void initializeYamDebug(void);
 void initializeEventsLog(void);
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------------------------------------
 
 #else // #ifdef KB_DEBUG_ENABLED
 
@@ -105,7 +119,14 @@ void initializeEventsLog(void);
 #define AddEventToBuffer_SpecialFlag(bSpecialFlag)
 
 #define setTickFirst(tickFirstParam)
+
 #define dumpEventsToUsb()
+#define dumpYamDebugToUsb(void)
+
+#define yamDebugPutSimpleLine(char * lineData)
+
+#define initializeYamDebug(void)
+#define initializeEventsLog(void)
 
 #endif // #ifdef KB_DEBUG_ENABLED
 

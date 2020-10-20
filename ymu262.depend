@@ -296,11 +296,11 @@
 1537557068 source:f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\middlewares\st\stm32_usb_device_library\core\src\usbd_ioreq.c
 	"usbd_ioreq.h"
 
-1603152622 source:f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\src\kb_debug.c
+1603186494 source:f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\src\kb_debug.c
 	"kb_debug.h"
 	"usbd_cdc_if.h"
 
-1603151726 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\inc\kb_debug.h
+1603184547 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\inc\kb_debug.h
 	"mamachdep.h"
 
 1602876038 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\ymu762\mamachdep.h
@@ -356,14 +356,15 @@
 	"madebug.h"
 	"madefs.h"
 
-1603150689 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\ymu762\madebug.h
+1603181465 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\ymu762\madebug.h
 	<stdio.h>
 	<assert.h>
 	"stm32f4xx.h"
+	"kb_debug.h"
 
 1050997636 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\ymu762\madefs.h
 
-1603148948 source:f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\ymu762\madevdrv.c
+1603209289 source:f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\ymu762\madevdrv.c
 	"madevdrv.h"
 	"kb_debug.h"
 
@@ -483,7 +484,7 @@
 1050997634 source:f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\ymu762\mawavcnv.c
 	"mawavcnv.h"
 
-1603151756 source:f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\src\main.c
+1603217328 source:f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\src\main.c
 	"main.h"
 	"stm32f4xx_hal.h"
 	"usb_device.h"
@@ -493,5 +494,5 @@
 	"masound.h"
 	"MMF.h"
 
-1603134638 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\mmf\mmf.h
+1603217322 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\mmf\mmf.h
 

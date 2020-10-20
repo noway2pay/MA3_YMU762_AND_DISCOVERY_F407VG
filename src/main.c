@@ -78,10 +78,15 @@ signed long CallBack(unsigned char id)
     switch(id)
     {
         case MASMW_REPEAT:
-            toggle_ORANGE_LED();
+            yamDebugPutSimpleLine("\n* MASMW_REPEAT *\n\n");
+            for(int i = 0; i < 100; i++)
+            {
+                toggle_ORANGE_LED();
+            }
             break;
 
         case MASMW_END_OF_SEQUENCE:
+            yamDebugPutSimpleLine("\n* MASMW_END_OF_SEQUENCE *\n\n");
             break;
 
         default:
@@ -94,8 +99,6 @@ signed long CallBack(unsigned char id)
 // IRQ handler
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
-    static uint8_t t=0;
-
     /* Prevent unused argument(s) compilation warning */
     UNUSED(GPIO_Pin);
 
@@ -124,8 +127,9 @@ int main(void)
     MX_USB_DEVICE_Init();
     MX_FSMC_Init();
 
-    initializeYamDebug();
-    //initializeEventsLog();
+    initializeYamDebug();       //initializeEventsLog();
+
+    yamDebugPutSimpleLine("*** START ***\n\n");
 
     AddEventToBuffer_SpecialFlag(LOGMA3_RESET);
     YMU762_Reset();
@@ -142,10 +146,7 @@ int main(void)
     AddEventToBuffer_SpecialFlag(LOGMA3_SP_VOLUME);
     MaSound_DeviceControl(MASMW_SP_VOLUME, 0, 0, 0);
 
-    // MMF header: MMMD @ 0x0000
-    // MIDI header: MTHd @ 0x0000
-    func=MaSound_Create((MMF[1] == 'M') ? MASMW_CNVID_MMF : MASMW_CNVID_MID);
-
+    func=MaSound_Create((MMF[1] == 'M') ? MASMW_CNVID_MMF : MASMW_CNVID_MID);   // MMF header: MMMD @ 0x0000, MIDI header: MTHd @ 0x0000
     file=MaSound_Load(func, (uint8_t*)MMF, sizeof(MMF), 1, CallBack, NULL);
 
     MaSound_Open(func,file,0,NULL);
@@ -158,15 +159,17 @@ int main(void)
     MaSound_Standby(func,file,NULL);
 
     while(! BUTTON_PRESSED);
+    HAL_Delay(5000);
 
     setTickFirst(HAL_GetTick());
     AddEventToBuffer_SpecialFlag(LOGMA3_START);
+
     MaSound_Start(func,file,0,NULL);    // Play once, loop -> change play_mode to 0
 
     while(1)
     {
-        //dumpEventsToUsb();
         dumpYamDebugToUsb();
+        //dumpEventsToUsb();
     }
 }
 
