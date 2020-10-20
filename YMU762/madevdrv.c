@@ -87,7 +87,7 @@ SINT32 MaDevDrv_SeekControl
 	static UINT8	packet0[3] = { 0x61, 0x82, 0x81 };	/* start sequencer */
 	static UINT8	packet1[3] = { 0x61, 0x82, 0x80 };	/* stop sequencer */
 
-	AddToBuffer_SpecialFlag(LOGMA3_SEEK_CONTROL);
+	AddEventToBuffer_SpecialFlag(LOGMA3_SEEK_CONTROL);
 
 	/* delayed sequence only */
 	if ( seq_id != MASMW_SEQTYPE_DELAYED )
@@ -193,7 +193,7 @@ void MaDevDrv_ControlInterrupt
 
 	/* interrupt disable */
 
-	AddToBuffer_SpecialFlag(LOGMA3_CONTROL_INTERRUPT);
+	AddEventToBuffer_SpecialFlag(LOGMA3_CONTROL_INTERRUPT);
 
 	data = (UINT8)MaDevDrv_ReceiveData( MA_INT_SETTING, 1 );
 
@@ -288,7 +288,7 @@ void MaDevDrv_IntHandler( void )
 
 	static UINT8	ma_int_priority[8] = { 0, 1, 6, 7, 2, 3, 5, 4 };
 
-	AddToBuffer_SpecialFlag(LOGMA3_INT_HANDLER);
+	AddEventToBuffer_SpecialFlag(LOGMA3_INT_HANDLER);
 
 	MADEVDRV_DBGMSG(("    MaDevDrv_IntHandler\n"));
 
@@ -345,7 +345,7 @@ SINT32 MaDevDrv_SendDelayedPacket
 	UINT32	      size					/* byte size of packets */
 )
 {
-    AddToBuffer_SpecialFlag(LOGMA3_SEND_DELAYED_PACKET);
+    AddEventToBuffer_SpecialFlag(LOGMA3_SEND_DELAYED_PACKET);
 
 #if MASMW_DEBUG
 	SINT32	result;
@@ -392,7 +392,7 @@ SINT32 MaDevDrv_SendDirectPacket
 	UINT32	i, j;
 	SINT32	result;
 
-	AddToBuffer_SpecialFlag(LOGMA3_SEND_DIRECT_PACKET);
+	AddEventToBuffer_SpecialFlag(LOGMA3_SEND_DIRECT_PACKET);
 
 #if MASMW_DEBUG
 	result = madebug_SendDirectPacket( ptr, (UINT16)size );
@@ -476,7 +476,7 @@ SINT32 MaDevDrv_ReceiveData
 	UINT8	count;
 	SINT32	result;
 
-	AddToBuffer_SpecialFlag(LOGMA3_RECEIVE_DATA);
+	AddEventToBuffer_SpecialFlag(LOGMA3_RECEIVE_DATA);
 
 	MADEVDRV_DBGMSG(("    MaDevDrv_ReceiveData: adrs=%ld, bufadrs=%d\n", address, buffer_address));
 
@@ -555,7 +555,7 @@ SINT32 MaDevDrv_SendDirectRamData
 	UINT8	temp = 0;
 	SINT32	result;
 
-	AddToBuffer_SpecialFlag(LOGMA3_SEND_DIRECT_RAM_DATA);
+	AddEventToBuffer_SpecialFlag(LOGMA3_SEND_DIRECT_RAM_DATA);
 
 #if MASMW_DEBUG
 	result = madebug_SendDirectRamData( address, data_type, data_ptr, data_size );
@@ -710,7 +710,7 @@ SINT32 MaDevDrv_SendDirectRamVal
 	SINT32	result;						/* result of function */
 	UINT8	packet_buffer[3+2];			/* packet buffer */
 
-	AddToBuffer_SpecialFlag(LOGMA3_SEND_DIRECT_RAM_VAL);
+	AddEventToBuffer_SpecialFlag(LOGMA3_SEND_DIRECT_RAM_VAL);
 
 #if MASMW_DEBUG
 	result = madebug_SendDirectRamVal( address, data_size, val );
@@ -825,7 +825,7 @@ static SINT32 MaDevDrv_StreamSetup
 	UINT32	ram_adrs;
 	SINT32	result;
 
-	AddToBuffer_SpecialFlag(LOGMA3_STREAM_SETUP);
+	AddEventToBuffer_SpecialFlag(LOGMA3_STREAM_SETUP);
 
 	format    = cinfo_ptr->streaminfo.format[sa_id];
 	wave_ptr  = cinfo_ptr->streaminfo.wave_ptr[sa_id];
@@ -918,7 +918,7 @@ static SINT32 MaDevDrv_StreamUpdate
 	UINT32	reg_index;
 	UINT8	ch;
 
-	AddToBuffer_SpecialFlag(LOGMA3_STREAM_UPDATE);
+	AddEventToBuffer_SpecialFlag(LOGMA3_STREAM_UPDATE);
 
 	write_block = cinfo_ptr->streaminfo.write_block[sa_id];
 	read_block  = cinfo_ptr->streaminfo.read_block[sa_id];
@@ -1150,7 +1150,7 @@ SINT32 MaDevDrv_StreamHandler
 	UINT8	num;
 	UINT32	seek_pos;
 
-	AddToBuffer_SpecialFlag(LOGMA3_STREAM_HANDLER);
+	AddEventToBuffer_SpecialFlag(LOGMA3_STREAM_HANDLER);
 
 	MADEVDRV_DBGMSG(("MaDevDrv_StreamHandler: sa_id=%d ctrl=%d ram_val=%d\n", sa_id, ctrl, ram_val));
 
@@ -1300,7 +1300,7 @@ void MaDevDrv_SoftInt0
 
 	(void)ctrl;							/* for unused warning message */
 
-	AddToBuffer_SpecialFlag(LOGMA3_SOFT_INT0);
+	AddEventToBuffer_SpecialFlag(LOGMA3_SOFT_INT0);
 
 	MADEVDRV_DBGMSG(("MaDevDrv_SoftInt0: ctrl=%d\n", ctrl));
 
@@ -1329,7 +1329,7 @@ void MaDevDrv_SoftInt1
 
 	(void)ctrl;							/* for unused warning message */
 
-	AddToBuffer_SpecialFlag(LOGMA3_SOFT_INT1);
+	AddEventToBuffer_SpecialFlag(LOGMA3_SOFT_INT1);
 
 	MADEVDRV_DBGMSG(("MaDevDrv_SoftInt1: ctrl=%d\n", ctrl));
 
@@ -1358,7 +1358,7 @@ void MaDevDrv_SoftInt2
 
 	(void)ctrl;						/* for unused warning message */
 
-	AddToBuffer_SpecialFlag(LOGMA3_SOFT_INT2);
+	AddEventToBuffer_SpecialFlag(LOGMA3_SOFT_INT2);
 
 	MADEVDRV_DBGMSG(("MaDevDrv_SoftInt2: ctrl=%d\n", ctrl));
 
@@ -1386,7 +1386,7 @@ void MaDevDrv_SoftInt3
 
 	(void)ctrl;						/* for unused warning message */
 
-	AddToBuffer_SpecialFlag(LOGMA3_SOFT_INT3);
+	AddEventToBuffer_SpecialFlag(LOGMA3_SOFT_INT3);
 
 	MADEVDRV_DBGMSG(("MaDevDrv_SoftInt3: ctrl=%d\n", ctrl));
 
@@ -1415,7 +1415,7 @@ void MaDevDrv_Timer0
 
 	(void)ctrl;					/* for unused warning message */
 
-	AddToBuffer_SpecialFlag(LOGMA3_TIMER0);
+	AddEventToBuffer_SpecialFlag(LOGMA3_TIMER0);
 
 	MADEVDRV_DBGMSG(("MaDevDrv_Timer0: ctrl=%d\n", ctrl));
 
@@ -1446,7 +1446,7 @@ void MaDevDrv_Timer1
 	UINT8	ctrl
 )
 {
-    AddToBuffer_SpecialFlag(LOGMA3_TIMER1);
+    AddEventToBuffer_SpecialFlag(LOGMA3_TIMER1);
 
 	MADEVDRV_DBGMSG(("MaDevDrv_Timer1: ctrl=%d\n", ctrl));
 
@@ -1479,7 +1479,7 @@ void MaDevDrv_Fifo
 						  ( ( ( MA_SEQUENCE + 2 ) >> 7 ) | 0x80 ),
 						  0x80 };
 
-    AddToBuffer_SpecialFlag(LOGMA3_FIFO);
+    AddEventToBuffer_SpecialFlag(LOGMA3_FIFO);
 
 	MADEVDRV_DBGMSG(("MaDevDrv_Fifo: ctrl=%d\n", ctrl));
 
@@ -1593,7 +1593,7 @@ SINT32 MaDevDrv_ClearFifo
 
 	MADEVDRV_DBGMSG(("MaDevDrv_ClearFifo\n"));
 
-	AddToBuffer_SpecialFlag(LOGMA3_CLEAR_FIFO);
+	AddEventToBuffer_SpecialFlag(LOGMA3_CLEAR_FIFO);
 
 	machdep_WriteStatusFlagReg( MA_BASIC_SETTING_REG );
 	machdep_WriteDataReg( 0x28 );
@@ -1644,7 +1644,7 @@ SINT32 MaDevDrv_StartSequencer
 
 	MADEVDRV_DBGMSG(("MaDevDrv_StartSequencer: seq_id=%ld\n", seq_id));
 
-	AddToBuffer_SpecialFlag(LOGMA3_START_SEQUENCER);
+	AddEventToBuffer_SpecialFlag(LOGMA3_START_SEQUENCER);
 
 	result = MASMW_SUCCESS;
 
@@ -1730,7 +1730,7 @@ SINT32 MaDevDrv_StopSequencer
 
 	MADEVDRV_DBGMSG(("MaDevDrv_StopSequencer: seq_id=%ld\n", seq_id));
 
-	AddToBuffer_SpecialFlag(LOGMA3_STOP_SEQUENCER);
+	AddEventToBuffer_SpecialFlag(LOGMA3_STOP_SEQUENCER);
 
 	switch ( seq_id )
 	{
@@ -1826,7 +1826,7 @@ void MaDevDrv_InitRegisters
 	static UINT8 data[15]  = { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01,
 							   0x03, 0x00, 0x02, 0x00, 0x00, 0x00, 0x00 };
 
-    AddToBuffer_SpecialFlag(LOGMA3_INIT_REGISTERS);
+    AddEventToBuffer_SpecialFlag(LOGMA3_INIT_REGISTERS);
 
 	MADEVDRV_DBGMSG(("MaDevDrv_InitRegisters:\n"));
 
@@ -1862,7 +1862,7 @@ SINT32 MaDevDrv_VerifyRegisters
 
 	MADEVDRV_DBGMSG(("MaDevDrv_VerifyRegisters:\n"));
 
-	AddToBuffer_SpecialFlag(LOGMA3_VERIFY_REGISTERS);
+	AddEventToBuffer_SpecialFlag(LOGMA3_VERIFY_REGISTERS);
 
 	/* Verify the channel volume value to 0x60 */
 	reg_adrs = (UINT32)MA_CHANNEL_VOLUME;
@@ -1924,7 +1924,7 @@ SINT32 MaDevDrv_PowerManagement
 
 	MADEVDRV_DBGMSG(("MaDevDrv_PowerManagement: mode=%d\n", mode));
 
-	AddToBuffer_SpecialFlag(LOGMA3_POWER_MANAGEMENT);
+	AddEventToBuffer_SpecialFlag(LOGMA3_POWER_MANAGEMENT);
 
 	switch ( mode )
 	{
@@ -2175,7 +2175,7 @@ SINT32 MaDevDrv_DeviceControl
 	SINT32	seq_flag;
 	UINT8	packet[3];
 
-	AddToBuffer_SpecialFlag(LOGMA3_DEVICE_CONTROL);
+	AddEventToBuffer_SpecialFlag(LOGMA3_DEVICE_CONTROL);
 
 	MADEVDRV_DBGMSG(("  MaDevDrv_DeviceControl: cmd=%d p1=%d p2=%d p3=%d\n", cmd, param1, param2, param3));
 
@@ -2296,7 +2296,7 @@ SINT32 MaDevDrv_Initialize( void )
 
 	MADEVDRV_DBGMSG(("MaDevDrv_Initialize\n"));
 
-	AddToBuffer_SpecialFlag(LOGMA3_INITIALIZE);
+	AddEventToBuffer_SpecialFlag(LOGMA3_INITIALIZE);
 
 	cinfo_ptr->seq_flag			= 0;
 	cinfo_ptr->stop_reg			= 0;

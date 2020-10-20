@@ -63,7 +63,7 @@ void machdep_WriteStatusFlagReg( UINT8	data )
 
 	MA_STATUS_REG = data;
 
-    AddToBuffer(0, 0, data);
+    AddEventToBuffer(0, 0, data);
 
 	// YMU762C_MA-3L2
 	machdep_Wait( 600 );
@@ -88,7 +88,7 @@ UINT8 machdep_ReadStatusFlagReg( void )
 
 	data = MA_STATUS_REG;
 
-    AddToBuffer(1, 0, data);
+    AddEventToBuffer(1, 0, data);
 
 	machdep_Wait( 70 );
 
@@ -112,7 +112,7 @@ void machdep_WriteDataReg( UINT8 data )
 
 	MA_DATA_REG = data;
 
-    AddToBuffer(0, 1, data);
+    AddEventToBuffer(0, 1, data);
 
 	// YMU762C_MA-3L2
 	machdep_Wait( 600 );
@@ -138,7 +138,7 @@ UINT8 machdep_ReadDataReg( void )
 
 	data = MA_DATA_REG;
 
-    AddToBuffer(1, 1, data);
+    AddEventToBuffer(1, 1, data);
 
 	machdep_Wait( 70 );
 
@@ -160,7 +160,7 @@ SINT32 machdep_CheckStatus( UINT8 flag )
 {
 	UINT8	read_data;
 
-	AddToBuffer_SpecialFlag(LOGMA3_CHECK_STATUS);
+	AddEventToBuffer_SpecialFlag(LOGMA3_CHECK_STATUS);
 
 	do
 	{
@@ -195,7 +195,7 @@ SINT32 machdep_WaitValidData( UINT8 flag )
 {
 	UINT8	read_data;
 
-	AddToBuffer_SpecialFlag(LOGMA3_WAIT_VALID_DATA);
+	AddEventToBuffer_SpecialFlag(LOGMA3_WAIT_VALID_DATA);
 
 	do
 	{
@@ -239,7 +239,7 @@ SINT32 machdep_CheckDelayedFifoEmpty( void )
 {
 	UINT32 flag;
 
-	AddToBuffer_SpecialFlag(LOGMA3_CHECK_DELAYED_FIFO_EMPTY);
+	AddEventToBuffer_SpecialFlag(LOGMA3_CHECK_DELAYED_FIFO_EMPTY);
 
 	flag = 0;
 	if( machdep_ReadStatusFlagReg()&MA_EMP_DW ) flag |= 0x01;
@@ -271,7 +271,7 @@ SINT32 machdep_WaitDelayedFifoEmpty( void )
 {
 	UINT32 read_data;
 
-	AddToBuffer_SpecialFlag(LOGMA3_WAIT_DELAYED_FIFO_EMPTY);
+	AddEventToBuffer_SpecialFlag(LOGMA3_WAIT_DELAYED_FIFO_EMPTY);
 
 	do
 	{
@@ -307,7 +307,7 @@ SINT32 machdep_WaitImmediateFifoEmpty( void )
 {
 	UINT8 read_data;
 
-    AddToBuffer_SpecialFlag(LOGMA3_WAIT_IMMEDIATE_FIFO_EMPTY);
+    AddEventToBuffer_SpecialFlag(LOGMA3_WAIT_IMMEDIATE_FIFO_EMPTY);
 
 	do
 	{

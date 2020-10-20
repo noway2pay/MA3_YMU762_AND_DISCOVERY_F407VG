@@ -1,44 +1,59 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <EmBitz_layout_file>
 	<ActiveTarget name="Debug" />
-	<File name="Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f407xx.h" open="1" top="0" tabpos="11" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f407xx.h" open="0" top="0" tabpos="11" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="119904" topLine="1715" />
+			<Cursor1 position="14067" topLine="171" />
 		</Cursor>
 	</File>
 	<File name="Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h" open="0" top="0" tabpos="13" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="3949" topLine="72" />
+			<Cursor1 position="8204" topLine="136" />
 		</Cursor>
 	</File>
-	<File name="Drivers\CMSIS\Include\arm_math.h" open="0" top="0" tabpos="16" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="Drivers\CMSIS\Include\arm_math.h" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="59579" topLine="1732" />
+			<Cursor1 position="19179" topLine="517" />
+		</Cursor>
+	</File>
+	<File name="Drivers\CMSIS\Include\cmsis_armcc.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2419" topLine="37" />
+		</Cursor>
+	</File>
+	<File name="Drivers\CMSIS\Include\cmsis_armcc_V6.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2716" topLine="48" />
 		</Cursor>
 	</File>
 	<File name="Drivers\CMSIS\Include\cmsis_gcc.h" open="0" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="12520" topLine="402" />
+			<Cursor1 position="81" topLine="0" />
 		</Cursor>
 	</File>
 	<File name="Drivers\CMSIS\Include\core_cm0.h" open="0" top="0" tabpos="18" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="31275" topLine="605" />
+			<Cursor1 position="7334" topLine="151" />
 		</Cursor>
 	</File>
 	<File name="Drivers\CMSIS\Include\core_cm3.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="19920" topLine="409" />
+			<Cursor1 position="101746" topLine="1665" />
 		</Cursor>
 	</File>
 	<File name="Drivers\CMSIS\Include\core_cm4.h" open="0" top="0" tabpos="22" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="10387" topLine="258" />
+			<Cursor1 position="94" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h" open="1" top="0" tabpos="10" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="Drivers\CMSIS\Include\core_cmFunc.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="12196" topLine="221" />
+			<Cursor1 position="94" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h" open="0" top="0" tabpos="10" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="11946" topLine="221" />
 		</Cursor>
 	</File>
 	<File name="Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_gpio.h" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -51,12 +66,12 @@
 			<Cursor1 position="13746" topLine="271" />
 		</Cursor>
 	</File>
-	<File name="Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal.c" open="1" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal.c" open="0" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="13741" topLine="339" />
+			<Cursor1 position="13821" topLine="339" />
 		</Cursor>
 	</File>
-	<File name="Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_gpio.c" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_gpio.c" open="0" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="16415" topLine="368" />
 		</Cursor>
@@ -71,12 +86,12 @@
 			<Cursor1 position="38658" topLine="1270" />
 		</Cursor>
 	</File>
-	<File name="inc\kb_debug.h" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="inc\kb_debug.h" open="1" top="0" tabpos="10" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="237" topLine="0" />
+			<Cursor1 position="2274" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="inc\main.h" open="1" top="0" tabpos="13" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="inc\main.h" open="0" top="0" tabpos="13" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="3503" topLine="57" />
 		</Cursor>
@@ -86,7 +101,7 @@
 			<Cursor1 position="2645" topLine="19" />
 		</Cursor>
 	</File>
-	<File name="inc\usbd_cdc_if.h" open="1" top="0" tabpos="18" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="inc\usbd_cdc_if.h" open="0" top="0" tabpos="18" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="109" topLine="0" />
 		</Cursor>
@@ -111,38 +126,40 @@
 			<Cursor1 position="8794" topLine="379" />
 		</Cursor>
 	</File>
-	<File name="MMF\MMF.h" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="MMF\MMF.h" open="0" top="0" tabpos="15" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="1990791" topLine="16" />
+			<Cursor1 position="2243" topLine="0" />
 		</Cursor>
 		<Folding>
-			<Collapse line="3" />
-			<Collapse line="1359" />
-			<Collapse line="2687" />
-			<Collapse line="3209" />
-			<Collapse line="3731" />
-			<Collapse line="9820" />
-			<Collapse line="24110" />
-			<Collapse line="27248" />
-			<Collapse line="36348" />
+			<Collapse line="130" />
+			<Collapse line="1485" />
+			<Collapse line="2813" />
+			<Collapse line="3335" />
+			<Collapse line="3857" />
+			<Collapse line="9945" />
+			<Collapse line="24235" />
+			<Collapse line="27373" />
+			<Collapse line="36473" />
+			<Collapse line="46373" />
+			<Collapse line="46998" />
 		</Folding>
 	</File>
-	<File name="src\kb_debug.c" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\kb_debug.c" open="1" top="0" tabpos="11" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="0" topLine="0" />
+			<Cursor1 position="1733" topLine="12" />
 		</Cursor>
 	</File>
-	<File name="src\main.c" open="1" top="0" tabpos="12" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\main.c" open="1" top="0" tabpos="18" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="3404" topLine="117" />
+			<Cursor1 position="2302" topLine="111" />
 		</Cursor>
 	</File>
-	<File name="src\startup_stm32f407xx.s" open="1" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\startup_stm32f407xx.s" open="1" top="1" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="4001" topLine="77" />
+			<Cursor1 position="3171" topLine="46" />
 		</Cursor>
 	</File>
-	<File name="src\stm32f4xx_hal_msp.c" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\stm32f4xx_hal_msp.c" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="5164" topLine="106" />
 		</Cursor>
@@ -152,24 +169,34 @@
 			<Cursor1 position="3108" topLine="58" />
 		</Cursor>
 	</File>
-	<File name="src\usbd_cdc_if.c" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\usbd_cdc_if.c" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="10926" topLine="299" />
+			<Cursor1 position="10730" topLine="291" />
 		</Cursor>
 	</File>
 	<File name="src\usbd_conf.c" open="0" top="0" tabpos="23" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="18819" topLine="658" />
+			<Cursor1 position="3008" topLine="38" />
 		</Cursor>
 	</File>
-	<File name="YMU762\madebug.c" open="0" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="stm32f407vg_flash.ld" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="1351" topLine="21" />
+			<Cursor1 position="1503" topLine="35" />
 		</Cursor>
 	</File>
-	<File name="YMU762\madebug.h" open="1" top="0" tabpos="14" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="YMU762\ma3sound.h" open="1" top="0" tabpos="13" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="1345" topLine="42" />
+			<Cursor1 position="4697" topLine="63" />
+		</Cursor>
+	</File>
+	<File name="YMU762\madebug.c" open="1" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="6983" topLine="412" />
+		</Cursor>
+	</File>
+	<File name="YMU762\madebug.h" open="1" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1153" topLine="36" />
 		</Cursor>
 	</File>
 	<File name="YMU762\madefs.h" open="0" top="0" tabpos="12" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -179,7 +206,7 @@
 	</File>
 	<File name="YMU762\madevdrv.c" open="1" top="0" tabpos="17" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="57628" topLine="2304" />
+			<Cursor1 position="37469" topLine="1444" />
 		</Cursor>
 	</File>
 	<File name="YMU762\madevdrv.h" open="0" top="0" tabpos="19" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -192,27 +219,27 @@
 			<Cursor1 position="22724" topLine="857" />
 		</Cursor>
 	</File>
-	<File name="YMU762\mamachdep.c" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="YMU762\mamachdep.c" open="1" top="0" tabpos="12" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="1227" topLine="37" />
+			<Cursor1 position="1672" topLine="172" />
 		</Cursor>
 	</File>
-	<File name="YMU762\mamachdep.h" open="1" top="1" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="YMU762\mamachdep.h" open="0" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="213" topLine="0" />
+			<Cursor1 position="326" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="YMU762\mamidcnv.c" open="1" top="0" tabpos="15" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="YMU762\mamidcnv.c" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="75013" topLine="1795" />
+			<Cursor1 position="74937" topLine="1779" />
 		</Cursor>
 	</File>
-	<File name="YMU762\mammfcnv.c" open="1" top="0" tabpos="16" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="YMU762\mammfcnv.c" open="1" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="109093" topLine="3004" />
+			<Cursor1 position="45953" topLine="1262" />
 		</Cursor>
 	</File>
-	<File name="YMU762\maphrcnv.c" open="0" top="0" tabpos="32" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="YMU762\maphrcnv.c" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="36875" topLine="1144" />
 		</Cursor>
@@ -227,9 +254,9 @@
 			<Cursor1 position="27921" topLine="906" />
 		</Cursor>
 	</File>
-	<File name="YMU762\masmwmain.c" open="0" top="0" tabpos="34" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="YMU762\masmwmain.c" open="1" top="0" tabpos="16" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="5020" topLine="195" />
+			<Cursor1 position="5022" topLine="186" />
 		</Cursor>
 	</File>
 	<File name="YMU762\masnddrv.c" open="0" top="0" tabpos="31" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -237,9 +264,9 @@
 			<Cursor1 position="58420" topLine="2079" />
 		</Cursor>
 	</File>
-	<File name="YMU762\masndseq.c" open="0" top="0" tabpos="27" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="YMU762\masndseq.c" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="11528" topLine="416" />
+			<Cursor1 position="11044" topLine="408" />
 		</Cursor>
 	</File>
 	<File name="YMU762\masndseq.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -247,14 +274,14 @@
 			<Cursor1 position="580" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="YMU762\masound.h" open="0" top="0" tabpos="28" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="YMU762\masound.h" open="1" top="0" tabpos="14" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="6631" topLine="131" />
+			<Cursor1 position="4466" topLine="62" />
 		</Cursor>
 	</File>
-	<File name="YMU762\masound2.h" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="YMU762\masound2.h" open="1" top="0" tabpos="15" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="3871" topLine="63" />
+			<Cursor1 position="1795" topLine="15" />
 		</Cursor>
 	</File>
 </EmBitz_layout_file>

@@ -14,7 +14,7 @@
 #ifdef KB_DEBUG_ENABLED
 
 // log buffer size
-#define LOG_ENTRIES_MAX 14400
+#define LOG_ENTRIES_MAX 100
 
 
 // log buffer entry structure
@@ -89,19 +89,23 @@ typedef enum
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------
 
-void AddToBuffer(int isRead, int isData, UINT8 bVal);
-void AddToBuffer_SpecialFlag(MA3LogFlag_Type bSpecialFlag);
+void AddEventToBuffer(int isRead, int isData, UINT8 bVal);
+void AddEventToBuffer_SpecialFlag(MA3LogFlag_Type bSpecialFlag);
 
 void setTickFirst(UINT32 tickFirstParam);
-void dumpToUsb(void);
+void dumpEventsToUsb(void);
+void dumpYamDebugToUsb(void);
+
+void initializeYamDebug(void);
+void initializeEventsLog(void);
 
 #else // #ifdef KB_DEBUG_ENABLED
 
-#define AddToBuffer(isRead, isData, bVal)
-#define AddToBuffer_SpecialFlag(bSpecialFlag)
+#define AddEventToBuffer(isRead, isData, bVal)
+#define AddEventToBuffer_SpecialFlag(bSpecialFlag)
 
 #define setTickFirst(tickFirstParam)
-#define dumpToUsb()
+#define dumpEventsToUsb()
 
 #endif // #ifdef KB_DEBUG_ENABLED
 

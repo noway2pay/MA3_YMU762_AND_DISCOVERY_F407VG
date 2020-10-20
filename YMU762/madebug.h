@@ -13,23 +13,24 @@
 #ifndef __MADEBUG_H__
 #define __MADEBUG_H__
 
-#define DEBUG		(0)
+#define DEBUG		(1)
 #define	MASMW_DEBUG	(0)
 
 #if DEBUG
  #include <stdio.h>
  #include <assert.h>
+ #include "stm32f4xx.h"
 #endif
 
 #if DEBUG
-#define DEBUG_MA_SMF_STREAM_CONVERTER
-#define DEBUG_MA_SMAF_AUDIO_STREAM_CONVERTER
-#define DEBUG_MA_REALTIME_MIDI_STREAM_CONVERTER
-#define DEBUG_MA_SMAF_PHRASE_STREAM_CONVERTER
-#define DEBUG_MA_SMAF_CONVERTER
-#define DEBUG_MA_SOUND_SEQUENCER
-#define DEBUG_MA_SOUND_DRIVER
-#define DEBUG_MA_RESOURCE_MANAGER
+//#define DEBUG_MA_SMF_STREAM_CONVERTER
+//#define DEBUG_MA_SMAF_AUDIO_STREAM_CONVERTER
+//#define DEBUG_MA_REALTIME_MIDI_STREAM_CONVERTER
+//#define DEBUG_MA_SMAF_PHRASE_STREAM_CONVERTER
+//#define DEBUG_MA_SMAF_CONVERTER
+//#define DEBUG_MA_SOUND_SEQUENCER
+//#define DEBUG_MA_SOUND_DRIVER
+//#define DEBUG_MA_RESOURCE_MANAGER
 #define DEBUG_MA_DEVICE_DRIVER
 
 #define MASMW_ASSERT(f)	assert(f)
@@ -37,66 +38,74 @@
 #define MASMW_ASSERT(f)	((void)0)
 #endif
 
-
 /* */
 
+#if DEBUG
+extern char yamDebugLogSingle[128];
+extern volatile uint32_t yamDebugLogSingleSize;
+extern void yamDebugConsume(void);
+extern void __disable_irq(void);
+extern void __enable_irq(void);
+
+#define yamDebug(...) { __disable_irq(); yamDebugLogSingleSize = sprintf(yamDebugLogSingle, __VA_ARGS__); yamDebugConsume(); __enable_irq(); }
+#endif
 
 #ifdef DEBUG_MA_SMF_STREAM_CONVERTER			/* SMF Converter */
- #define MASMFCNV_DBGMSG(a)	printf a
+ #define MASMFCNV_DBGMSG(a)	yamDebug a
 #else
  #define MASMFCNV_DBGMSG(a)
 #endif
 
 #ifdef DEBUG_MA_WAV_STREAM_CONVERTER			/* WAV Converter */
- #define MAWAVCNV_DBGMSG(a)	printf a
+ #define MAWAVCNV_DBGMSG(a)	yamDebug a
 #else
  #define MAWAVCNV_DBGMSG(a)
 #endif
 
 #ifdef DEBUG_MA_SMAF_AUDIO_STREAM_CONVERTER		/* SMAF/Audio Converter */
- #define MAAUDCNV_DBGMSG(a)	printf a
+ #define MAAUDCNV_DBGMSG(a)	yamDebug a
 #else
  #define MAAUDCNV_DBGMSG(a)
 #endif
 
 #ifdef DEBUG_MA_REALTIME_MIDI_STREAM_CONVERTER	/* Realtime MIDI Converter */
- #define MARMDCNV_DBGMSG(a)	printf a
+ #define MARMDCNV_DBGMSG(a)	yamDebug a
 #else
  #define MARMDCNV_DBGMSG(a)
 #endif
 
 #ifdef DEBUG_MA_SMAF_PHRASE_STREAM_CONVERTER	/* SMAF/Phrase Converter */
- #define MAPHRCNV_DBGMSG(a)	printf a
+ #define MAPHRCNV_DBGMSG(a)	yamDebug a
 #else
  #define MAPHRCNV_DBGMSG(a)
 #endif
 
 #ifdef DEBUG_MA_SMAF_CONVERTER					/* MA SMAF Converter */
- #define MAMMFCNV_DBGMSG(a)	printf a
+ #define MAMMFCNV_DBGMSG(a)	yamDebug a
 #else
  #define MAMMFCNV_DBGMSG(a)
 #endif
 
 #ifdef DEBUG_MA_SOUND_SEQUENCER					/* MA Sound Sequencer */
- #define MASNDSEQ_DBGMSG(a)	printf a
+ #define MASNDSEQ_DBGMSG(a)	yamDebug a
 #else
  #define MASNDSEQ_DBGMSG(a)
 #endif
 
 #ifdef DEBUG_MA_SOUND_DRIVER					/* MA Sound Driver */
- #define MASNDDRV_DBGMSG(a)	printf a
+ #define MASNDDRV_DBGMSG(a)	yamDebug a
 #else
  #define MASNDDRV_DBGMSG(a)
 #endif
 
 #ifdef DEBUG_MA_RESOURCE_MANAGER				/* MA Resource Manager */
- #define MARESMGR_DBGMSG(a)	printf a
+ #define MARESMGR_DBGMSG(a)	yamDebug a
 #else
  #define MARESMGR_DBGMSG(a)
 #endif
 
 #ifdef DEBUG_MA_DEVICE_DRIVER					/* MA Device Driver */
- #define MADEVDRV_DBGMSG(a)	printf a
+ #define MADEVDRV_DBGMSG(a)	yamDebug a
 #else
  #define MADEVDRV_DBGMSG(a)
 #endif

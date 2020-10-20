@@ -58,15 +58,27 @@ void toggle_GREEN_LED()
 }
 
 
+void toggle_ORANGE_LED()
+{
+    static uint8_t t=0;
+
+    t^=1;
+
+    if(t) {
+        LED(ORANGE,SET);
+    } else {
+       LED(ORANGE,RESET);
+    }
+}
+
+
 signed long CallBack(unsigned char id)
 {
 
     switch(id)
     {
         case MASMW_REPEAT:
-            LED(ORANGE,SET);
-            while(! BUTTON_PRESSED) {};
-            LED(ORANGE,RESET);
+            toggle_ORANGE_LED();
             break;
 
         case MASMW_END_OF_SEQUENCE:
@@ -112,21 +124,22 @@ int main(void)
     MX_USB_DEVICE_Init();
     MX_FSMC_Init();
 
-    AddToBuffer_SpecialFlag(LOGMA3_RESET);
+    initializeYamDebug();
+    //initializeEventsLog();
+
+    AddEventToBuffer_SpecialFlag(LOGMA3_RESET);
     YMU762_Reset();
 
-    while(! BUTTON_PRESSED);
-
-    AddToBuffer_SpecialFlag(LOGMA3_SOUND_INITIALIZE);
+    AddEventToBuffer_SpecialFlag(LOGMA3_SOUND_INITIALIZE);
     MaSound_Initialize();
 
-    AddToBuffer_SpecialFlag(LOGMA3_HP_VOLUME);
+    AddEventToBuffer_SpecialFlag(LOGMA3_HP_VOLUME);
     MaSound_DeviceControl(MASMW_HP_VOLUME, 0, 31, 31);
 
-    AddToBuffer_SpecialFlag(LOGMA3_EQ_VOLUME);
+    AddEventToBuffer_SpecialFlag(LOGMA3_EQ_VOLUME);
     MaSound_DeviceControl(MASMW_EQ_VOLUME, 0, 0, 0);
 
-    AddToBuffer_SpecialFlag(LOGMA3_SP_VOLUME);
+    AddEventToBuffer_SpecialFlag(LOGMA3_SP_VOLUME);
     MaSound_DeviceControl(MASMW_SP_VOLUME, 0, 0, 0);
 
     // MMF header: MMMD @ 0x0000
@@ -137,21 +150,23 @@ int main(void)
 
     MaSound_Open(func,file,0,NULL);
 
-    AddToBuffer_SpecialFlag(LOGMA3_SET_VOLUME);
+    AddEventToBuffer_SpecialFlag(LOGMA3_SET_VOLUME);
     volume=127; //Max 0 dB
     MaSound_Control(func,file,MASMW_SET_VOLUME,&volume,NULL);
 
-    AddToBuffer_SpecialFlag(LOGMA3_STANDBY);
+    AddEventToBuffer_SpecialFlag(LOGMA3_STANDBY);
     MaSound_Standby(func,file,NULL);
 
-    setTickFirst(HAL_GetTick());
+    while(! BUTTON_PRESSED);
 
-    AddToBuffer_SpecialFlag(LOGMA3_START);
+    setTickFirst(HAL_GetTick());
+    AddEventToBuffer_SpecialFlag(LOGMA3_START);
     MaSound_Start(func,file,0,NULL);    // Play once, loop -> change play_mode to 0
 
     while(1)
     {
-        // dumpToUsb();
+        //dumpEventsToUsb();
+        dumpYamDebugToUsb();
     }
 }
 

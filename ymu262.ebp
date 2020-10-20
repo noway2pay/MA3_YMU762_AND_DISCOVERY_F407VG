@@ -239,7 +239,7 @@
 		<Unit filename="src\usbd_desc.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="STM32F407VGTx_FLASH.ld" />
+		<Unit filename="stm32f407vg_flash.ld" />
 		<Unit filename="YMU762\ma3sound.h" />
 		<Unit filename="YMU762\macnvprf.h" />
 		<Unit filename="YMU762\madebug.c">

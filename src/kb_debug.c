@@ -6,17 +6,10 @@
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------
 
-// log buffer
-YMU262_LOG_ENTRY logbuf[LOG_ENTRIES_MAX];
-// log buffer's variables
-volatile UINT32 ulPos = 0;
-volatile UINT32 ulCount = 0;
-
-//---------------------------------------------------------------------------------------------------------------------------------------------------
-
 // USB register/operation dump related stuff
 
 #define USB_OUT_PACKET_MAX 512
+
 #define SINGLE_LOG_ENTRY 13
 
 // -10 because of the "timestamp:" preamble
@@ -37,10 +30,118 @@ uint32_t CDC_requests_sent = 0;
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------
 
+#define YAM_DEBUG_SIZE 55000
+
+// using whole CCM RAM for debug FIFO
+//char yamDebugLogFifo[YAM_DEBUG_SIZE] __attribute__((section("CCMRAM")));
+char yamDebugLogFifo[YAM_DEBUG_SIZE];
+
+volatile uint32_t yamDebugPos = 0;
+
+char yamDebugLogSingle[128];
+volatile uint32_t yamDebugLogSingleSize = 0;
+
+void yamDebugConsume(void)
+{
+    for(int i=0; i<sizeof(yamDebugLogSingle); i++)
+    {
+        if(i==yamDebugLogSingleSize)
+        {
+            break;
+        }
+
+        yamDebugLogFifo[yamDebugPos] = yamDebugLogSingle[i];
+
+        yamDebugPos++;
+        if(yamDebugPos >= YAM_DEBUG_SIZE)
+        {
+            yamDebugPos = 0;
+        }
+
+    }
+}
+
+void initializeYamDebug(void)
+{
+    lastPos = 0;
+}
+
+
+void dumpYamDebugToUsb(void)
+{
+    // update "previous" last position and new last position
+    lastPosPrev = lastPos;
+    lastPos = yamDebugPos;
+
+    // first position was previously the last one (+1 as we want to send only new log entries)
+    firstPos = lastPosPrev + 1;
+
+    if(firstPos >= YAM_DEBUG_SIZE)
+    {
+        firstPos = 0;
+    }
+
+    if(lastPos >= firstPos)                                             // some new samples stored (no boundary crossed)
+        delta = lastPos - firstPos;
+    else
+        delta = YAM_DEBUG_SIZE - firstPos + lastPos;                    // boundary crossed
+
+    // if TX busy or no data to be sent - check again in 1 ms
+    if( (CDC_CheckTransmitPossible() == USBD_BUSY) || (delta == 0) )
+    {
+        //delay_ms(1);
+        return;
+    }
+
+    thisChunk = MIN(delta, YAM_DEBUG_SIZE);
+
+    while(delta > 0)
+    {
+        for(int i=0; i < thisChunk; i++)
+        {
+            strTmp[i] = yamDebugLogFifo[firstPos];
+
+            firstPos++;
+            if(firstPos >= YAM_DEBUG_SIZE)
+            {
+                firstPos = 0;
+            }
+        }
+
+        CDC_Transmit_FS((UINT8 *) strTmp, thisChunk);
+
+        nLen = 0;
+
+        while( CDC_CheckTransmitPossible() == USBD_BUSY )
+        {
+            //delay_ms(1);
+        }
+
+        CDC_requests_sent++;
+
+        delta -= thisChunk;
+    }
+
+
+    lastPos = firstPos;
+}
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+
+// log buffer
+YMU262_LOG_ENTRY logbuf[LOG_ENTRIES_MAX];
+// log buffer's variables
+volatile uint32_t ulPos = 0;
+volatile uint32_t ulCount = 0;
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+
 // store access to data/command register (both write and read); try to compress multiple accesses (e.g. waiting for some flag)
 
-void AddToBuffer(int isRead, int isData, UINT8 bVal )
+void AddEventToBuffer(int isRead, int isData, UINT8 bVal )
 {
+    __disable_irq();
+
     UINT8 flag = (isRead ? 1 : 0) | (isData ? 2 : 0);
 
     // if repeat (e.g. read status - with the same data returned)
@@ -76,14 +177,17 @@ void AddToBuffer(int isRead, int isData, UINT8 bVal )
 
     // some counter for reference ;)
     ulCount++;
+
+    __enable_irq();
 }
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------
 
 // store special operation
 
-void AddToBuffer_SpecialFlag(MA3LogFlag_Type bSpecialFlag)
+void AddEventToBuffer_SpecialFlag(MA3LogFlag_Type bSpecialFlag)
 {
+    __disable_irq();
 
     // if "leaving" repeat - advance position not to overwrite the "repeat" log entry
     if( (logbuf[ulPos].flag & 0x80) != 0 )
@@ -108,6 +212,8 @@ void AddToBuffer_SpecialFlag(MA3LogFlag_Type bSpecialFlag)
     }
 
     ulCount++;
+
+    __enable_irq();
 }
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------
@@ -118,12 +224,18 @@ void setTickFirst(uint32_t tickFirstParam)
     tickFirst = tickFirstParam;
 }
 
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+
+void initializeEventsLog(void)
+{
+    lastPos = LOG_ENTRIES_MAX - 1;
+}
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------
 
 // called in the loop, will be pushing the data collected (since the last time this was called) to USB, in HEX-ASCII form (+CR) per log entry
 
-void dumpToUsb(void)
+void dumpEventsToUsb(void)
 {
     // update "previous" last position and new last position
     lastPosPrev = lastPos;
