@@ -1,6 +1,8 @@
 # MA3_YMU762_AND_DISCOVERY_F407VG
 ![Screenshot](/CIRCUIT.jpg)
 
+![Screenshot](/IMG_20190407_202642.jpg)
+
 This all started here (credits go to "Gospodin Riba"):
 https://vrtp.ru/index.php?act=categories&CODE=article&article=3718
 More:
@@ -17,3 +19,4 @@ Wegi received my second ("hand made in Poland") PCB with MA-3 and all the code I
 Results:
 https://soundcloud.com/konrad-b-694217055/naariayllove-ymu762
 https://soundcloud.com/konrad-b-694217055/bodyandbody-ymu762
+
