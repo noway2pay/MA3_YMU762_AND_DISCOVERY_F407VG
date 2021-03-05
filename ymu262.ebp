@@ -207,7 +207,9 @@
 		<Unit filename="Middlewares\ST\STM32_USB_Device_Library\Core\Src\usbd_ioreq.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="MMF\dro.h" />
 		<Unit filename="MMF\MMF.h" />
+		<Unit filename="MMF\mmf2.h" />
 		<Unit filename="readme.txt" />
 		<Unit filename="src\kb_debug.c">
 			<Option compilerVar="CC" />

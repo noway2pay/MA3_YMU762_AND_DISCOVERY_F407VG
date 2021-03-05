@@ -8,8 +8,9 @@
 
 #include "mamachdep.h"
 #include "masound.h"
+//#include "madevdrv.h"
 
-#include "MMF.h"
+
 
 /* Private variables ---------------------------------------------------------*/
 SRAM_HandleTypeDef hsram1;
@@ -114,6 +115,12 @@ int32_t file = 0;
 uint8_t volume = 0;
 
 
+#define MMF Marimba_D1
+
+#if 0
+//#include "MMF.h"
+#include "mmf2.h"
+
 int main(void)
 {
     /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
@@ -172,6 +179,171 @@ int main(void)
         //dumpEventsToUsb();
     }
 }
+#else
+
+
+extern SINT32 MaSndDrv_Opl2NoteOn
+(
+	UINT32	ch,							/* channel number */
+    UINT8 * voiceData                   // pitch + MA3 2OP block
+);
+
+extern SINT32 MaSndDrv_Opl2PitchBend
+(
+	UINT32	ch,							/* channel number */
+    UINT8 * voiceData                   // pitch
+);
+
+extern SINT32 MaSndDrv_Opl2NoteOff
+(
+	UINT32	ch							/* channel number */
+);
+
+
+
+
+
+#define DRO Edlib_000_dro
+
+#include "dro.h"
+
+int main(void)
+{
+    /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
+    HAL_Init();
+
+    /* Configure the system clock */
+    SystemClock_Config();
+
+    /* Initialize all configured peripherals */
+    MX_GPIO_Init();
+    MX_USB_DEVICE_Init();
+    MX_FSMC_Init();
+
+    initializeYamDebug();       //initializeEventsLog();
+
+    yamDebugPutSimpleLine("*** START ***\n\n");
+
+    AddEventToBuffer_SpecialFlag(LOGMA3_RESET);
+    YMU762_Reset();
+
+    AddEventToBuffer_SpecialFlag(LOGMA3_SOUND_INITIALIZE);
+
+    //MaSound_Initialize();
+    //-------------------
+
+	/* Initialize the uninitialized registers by software reset */
+	MaDevDrv_InitRegisters();
+
+	/* Set the PLL. */
+	MaDevDrv_DeviceControl( 7, MA_ADJUST1_VALUE, MA_ADJUST2_VALUE, 0 );
+
+	/* Disable power down mode. */
+	int32_t result = MaDevDrv_PowerManagement( 1 );
+	if ( result != MASMW_SUCCESS )
+	{
+		return result;
+	}
+
+	/* Set volume mode */
+	MaDevDrv_DeviceControl( 8, 0x03, 0x03, 0x03 );
+   //-------------------
+
+
+    AddEventToBuffer_SpecialFlag(LOGMA3_HP_VOLUME);
+    MaSound_DeviceControl(MASMW_HP_VOLUME, 0, 31, 31);
+
+    AddEventToBuffer_SpecialFlag(LOGMA3_EQ_VOLUME);
+    MaSound_DeviceControl(MASMW_EQ_VOLUME, 0, 0, 0);
+
+    AddEventToBuffer_SpecialFlag(LOGMA3_SP_VOLUME);
+    MaSound_DeviceControl(MASMW_SP_VOLUME, 0, 0, 0);
+
+    //func=MaSound_Create((MMF[1] == 'M') ? MASMW_CNVID_MMF : MASMW_CNVID_MID);   // MMF header: MMMD @ 0x0000, MIDI header: MTHd @ 0x0000
+    //file=MaSound_Load(func, (uint8_t*)MMF, sizeof(MMF), 1, CallBack, NULL);
+
+    //MaSound_Open(func,file,0,NULL);
+
+    AddEventToBuffer_SpecialFlag(LOGMA3_SET_VOLUME);
+    volume=127; //Max 0 dB
+    MaSound_Control(func,file,MASMW_SET_VOLUME,&volume,NULL);
+
+    while(! BUTTON_PRESSED);
+    HAL_Delay(1000);
+
+    setTickFirst(HAL_GetTick());
+    AddEventToBuffer_SpecialFlag(LOGMA3_START);
+
+    //MaSound_Start(func,file,0,NULL);    // Play once, loop -> change play_mode to 0
+
+    int DRO_size = sizeof(DRO);
+    uint8_t * DRO_ptr = (uint8_t*)(DRO);
+    uint8_t * DRO_end_ptr = (uint8_t*)(DRO) + DRO_size;
+
+    uint16_t DRO_delay;
+    uint32_t DRO_nextEventTick;
+    uint32_t tick;
+
+    int8_t channel;
+
+
+    while (1)
+    {
+
+        DRO_ptr = (uint8_t*)(DRO);
+        DRO_nextEventTick =  0;
+
+        while(DRO_ptr < DRO_end_ptr)
+        {
+            dumpYamDebugToUsb();
+            //dumpEventsToUsb();
+
+            tick = HAL_GetTick();
+
+            if(tick < DRO_nextEventTick)
+            {
+                continue;
+            }
+
+            DRO_delay = (DRO_ptr[1] << 8) | DRO_ptr[0];
+            DRO_nextEventTick = tick + DRO_delay;
+
+            channel = DRO_ptr[2];
+
+            if (channel & 0x80)
+            {
+                channel &= 0x0F;
+                MaSndDrv_Opl2NoteOn(channel, & DRO_ptr[3]);
+
+                DRO_ptr += (2 + MA3_2OP_VOICE_PARAM_SIZE);      // + pitch (2) + voice data
+            }
+            else if ((channel & 0x40) == 0x40)
+            {
+                channel &= 0x0F;
+                MaSndDrv_Opl2PitchBend(channel, & DRO_ptr[3]);
+
+                DRO_ptr += (2);                                 // + pitch (2)
+            }
+            else if ((channel & 0x80) == 0)
+            {
+                channel &= 0x0F;
+                MaSndDrv_Opl2NoteOff(channel);
+            }
+
+            DRO_ptr += (2 + 1);                                 // delay (2) + channel (1) - common for Note on and Note offs
+
+
+        }
+
+        while(! BUTTON_PRESSED);
+        HAL_Delay(1000);
+    }
+
+
+
+
+}
+#endif
 
 
 

@@ -1,11 +1,11 @@
 # depslib dependency file v1.0
-1537557065 source:f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\drivers\stm32f4xx_hal_driver\src\stm32f4xx_hal.c
+1537553465 source:f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\drivers\stm32f4xx_hal_driver\src\stm32f4xx_hal.c
 	"stm32f4xx_hal.h"
 
-1537557064 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\drivers\stm32f4xx_hal_driver\inc\stm32f4xx_hal.h
+1537553464 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\drivers\stm32f4xx_hal_driver\inc\stm32f4xx_hal.h
 	"stm32f4xx_hal_conf.h"
 
-1537729290 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\inc\stm32f4xx_hal_conf.h
+1537725690 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\inc\stm32f4xx_hal_conf.h
 	"main.h"
 	"stm32f4xx_hal_rcc.h"
 	"stm32f4xx_hal_exti.h"
@@ -54,18 +54,18 @@
 	"stm32f4xx_hal_dfsdm.h"
 	"stm32f4xx_hal_lptim.h"
 
-1602889716 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\inc\main.h
+1603214562 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\inc\main.h
 
-1537557065 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\drivers\stm32f4xx_hal_driver\inc\stm32f4xx_hal_rcc.h
+1537553465 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\drivers\stm32f4xx_hal_driver\inc\stm32f4xx_hal_rcc.h
 	"stm32f4xx_hal_def.h"
 	"stm32f4xx_hal_rcc_ex.h"
 
-1537557064 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\drivers\stm32f4xx_hal_driver\inc\stm32f4xx_hal_def.h
+1537553464 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\drivers\stm32f4xx_hal_driver\inc\stm32f4xx_hal_def.h
 	"stm32f4xx.h"
 	"Legacy/stm32_hal_legacy.h"
 	<stdio.h>
 
-1537730315 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\drivers\cmsis\device\st\stm32f4xx\include\stm32f4xx.h
+1537726715 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\drivers\cmsis\device\st\stm32f4xx\include\stm32f4xx.h
 	"stm32f405xx.h"
 	"stm32f415xx.h"
 	"stm32f407xx.h"
@@ -91,18 +91,18 @@
 	"stm32f423xx.h"
 	"stm32f4xx_hal.h"
 
-1537557041 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\drivers\cmsis\device\st\stm32f4xx\include\stm32f407xx.h
+1537553441 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\drivers\cmsis\device\st\stm32f4xx\include\stm32f407xx.h
 	"core_cm4.h"
 	"system_stm32f4xx.h"
 	<stdint.h>
 
-1537780816 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\drivers\cmsis\include\core_cm4.h
+1537777216 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\drivers\cmsis\include\core_cm4.h
 	<stdint.h>
 	"core_cmInstr.h"
 	"core_cmFunc.h"
 	"core_cmSimd.h"
 
-1537557064 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\drivers\cmsis\include\core_cminstr.h
+1537553464 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\drivers\cmsis\include\core_cminstr.h
 	"cmsis_armcc.h"
 	"cmsis_armcc_V6.h"
 	"cmsis_gcc.h"
@@ -110,13 +110,13 @@
 	<cmsis_ccs.h>
 	<cmsis_csm.h>
 
-1537557064 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\drivers\cmsis\include\cmsis_armcc.h
+1537553464 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\drivers\cmsis\include\cmsis_armcc.h
 
-1537557064 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\drivers\cmsis\include\cmsis_armcc_v6.h
+1537553464 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\drivers\cmsis\include\cmsis_armcc_v6.h
 
-1537557064 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\drivers\cmsis\include\cmsis_gcc.h
+1537553464 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\drivers\cmsis\include\cmsis_gcc.h
 
-1537557064 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\drivers\cmsis\include\core_cmfunc.h
+1537553464 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\drivers\cmsis\include\core_cmfunc.h
 	"cmsis_armcc.h"
 	"cmsis_armcc_V6.h"
 	"cmsis_gcc.h"
@@ -124,7 +124,7 @@
 	<cmsis_ccs.h>
 	<cmsis_csm.h>
 
-1537557064 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\drivers\cmsis\include\core_cmsimd.h
+1537553464 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\drivers\cmsis\include\core_cmsimd.h
 	"cmsis_armcc.h"
 	"cmsis_armcc_V6.h"
 	"cmsis_gcc.h"
@@ -132,304 +132,304 @@
 	<cmsis_ccs.h>
 	<cmsis_csm.h>
 
-1537557041 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\drivers\cmsis\device\st\stm32f4xx\include\system_stm32f4xx.h
+1537553441 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\drivers\cmsis\device\st\stm32f4xx\include\system_stm32f4xx.h
 
-1537557064 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\drivers\stm32f4xx_hal_driver\inc\legacy\stm32_hal_legacy.h
+1537553464 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\drivers\stm32f4xx_hal_driver\inc\legacy\stm32_hal_legacy.h
 
-1537557065 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\drivers\stm32f4xx_hal_driver\inc\stm32f4xx_hal_rcc_ex.h
+1537553465 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\drivers\stm32f4xx_hal_driver\inc\stm32f4xx_hal_rcc_ex.h
 	"stm32f4xx_hal_def.h"
 
-1537557064 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\drivers\stm32f4xx_hal_driver\inc\stm32f4xx_hal_gpio.h
+1537553464 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\drivers\stm32f4xx_hal_driver\inc\stm32f4xx_hal_gpio.h
 	"stm32f4xx_hal_def.h"
 	"stm32f4xx_hal_gpio_ex.h"
 
-1537557064 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\drivers\stm32f4xx_hal_driver\inc\stm32f4xx_hal_gpio_ex.h
+1537553464 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\drivers\stm32f4xx_hal_driver\inc\stm32f4xx_hal_gpio_ex.h
 	"stm32f4xx_hal_def.h"
 
-1537557064 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\drivers\stm32f4xx_hal_driver\inc\stm32f4xx_hal_dma.h
+1537553464 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\drivers\stm32f4xx_hal_driver\inc\stm32f4xx_hal_dma.h
 	"stm32f4xx_hal_def.h"
 	"stm32f4xx_hal_dma_ex.h"
 
-1537557064 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\drivers\stm32f4xx_hal_driver\inc\stm32f4xx_hal_dma_ex.h
+1537553464 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\drivers\stm32f4xx_hal_driver\inc\stm32f4xx_hal_dma_ex.h
 	"stm32f4xx_hal_def.h"
 
-1537557064 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\drivers\stm32f4xx_hal_driver\inc\stm32f4xx_hal_cortex.h
+1537553464 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\drivers\stm32f4xx_hal_driver\inc\stm32f4xx_hal_cortex.h
 	"stm32f4xx_hal_def.h"
 
-1537557064 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\drivers\stm32f4xx_hal_driver\inc\stm32f4xx_hal_flash.h
+1537553464 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\drivers\stm32f4xx_hal_driver\inc\stm32f4xx_hal_flash.h
 	"stm32f4xx_hal_def.h"
 	"stm32f4xx_hal_flash_ex.h"
 	"stm32f4xx_hal_flash_ramfunc.h"
 
-1537557064 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\drivers\stm32f4xx_hal_driver\inc\stm32f4xx_hal_flash_ex.h
+1537553464 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\drivers\stm32f4xx_hal_driver\inc\stm32f4xx_hal_flash_ex.h
 	"stm32f4xx_hal_def.h"
 
-1537557064 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\drivers\stm32f4xx_hal_driver\inc\stm32f4xx_hal_flash_ramfunc.h
+1537553464 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\drivers\stm32f4xx_hal_driver\inc\stm32f4xx_hal_flash_ramfunc.h
 	"stm32f4xx_hal_def.h"
 
-1537557065 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\drivers\stm32f4xx_hal_driver\inc\stm32f4xx_hal_sram.h
+1537553465 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\drivers\stm32f4xx_hal_driver\inc\stm32f4xx_hal_sram.h
 	"stm32f4xx_ll_fsmc.h"
 	"stm32f4xx_ll_fmc.h"
 
-1537557065 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\drivers\stm32f4xx_hal_driver\inc\stm32f4xx_ll_fsmc.h
+1537553465 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\drivers\stm32f4xx_hal_driver\inc\stm32f4xx_ll_fsmc.h
 	"stm32f4xx_hal_def.h"
 
-1537557065 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\drivers\stm32f4xx_hal_driver\inc\stm32f4xx_hal_pwr.h
+1537553465 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\drivers\stm32f4xx_hal_driver\inc\stm32f4xx_hal_pwr.h
 	"stm32f4xx_hal_def.h"
 	"stm32f4xx_hal_pwr_ex.h"
 
-1537557065 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\drivers\stm32f4xx_hal_driver\inc\stm32f4xx_hal_pwr_ex.h
+1537553465 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\drivers\stm32f4xx_hal_driver\inc\stm32f4xx_hal_pwr_ex.h
 	"stm32f4xx_hal_def.h"
 
-1537557065 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\drivers\stm32f4xx_hal_driver\inc\stm32f4xx_hal_tim.h
+1537553465 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\drivers\stm32f4xx_hal_driver\inc\stm32f4xx_hal_tim.h
 	"stm32f4xx_hal_def.h"
 	"stm32f4xx_hal_tim_ex.h"
 
-1537557065 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\drivers\stm32f4xx_hal_driver\inc\stm32f4xx_hal_tim_ex.h
+1537553465 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\drivers\stm32f4xx_hal_driver\inc\stm32f4xx_hal_tim_ex.h
 	"stm32f4xx_hal_def.h"
 
-1537557065 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\drivers\stm32f4xx_hal_driver\inc\stm32f4xx_hal_pcd.h
+1537553465 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\drivers\stm32f4xx_hal_driver\inc\stm32f4xx_hal_pcd.h
 	"stm32f4xx_ll_usb.h"
 	"stm32f4xx_hal_pcd_ex.h"
 
-1537557065 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\drivers\stm32f4xx_hal_driver\inc\stm32f4xx_ll_usb.h
+1537553465 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\drivers\stm32f4xx_hal_driver\inc\stm32f4xx_ll_usb.h
 	"stm32f4xx_hal_def.h"
 
-1537557065 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\drivers\stm32f4xx_hal_driver\inc\stm32f4xx_hal_pcd_ex.h
+1537553465 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\drivers\stm32f4xx_hal_driver\inc\stm32f4xx_hal_pcd_ex.h
 	"stm32f4xx_hal_def.h"
 
-1537557065 source:f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\drivers\stm32f4xx_hal_driver\src\stm32f4xx_hal_cortex.c
+1537553465 source:f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\drivers\stm32f4xx_hal_driver\src\stm32f4xx_hal_cortex.c
 	"stm32f4xx_hal.h"
 
-1537557065 source:f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\drivers\stm32f4xx_hal_driver\src\stm32f4xx_hal_dma.c
+1537553465 source:f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\drivers\stm32f4xx_hal_driver\src\stm32f4xx_hal_dma.c
 	"stm32f4xx_hal.h"
 
-1537557065 source:f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\drivers\stm32f4xx_hal_driver\src\stm32f4xx_hal_dma_ex.c
+1537553465 source:f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\drivers\stm32f4xx_hal_driver\src\stm32f4xx_hal_dma_ex.c
 	"stm32f4xx_hal.h"
 
-1537557065 source:f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\drivers\stm32f4xx_hal_driver\src\stm32f4xx_hal_flash.c
+1537553465 source:f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\drivers\stm32f4xx_hal_driver\src\stm32f4xx_hal_flash.c
 	"stm32f4xx_hal.h"
 
-1537557065 source:f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\drivers\stm32f4xx_hal_driver\src\stm32f4xx_hal_flash_ex.c
+1537553465 source:f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\drivers\stm32f4xx_hal_driver\src\stm32f4xx_hal_flash_ex.c
 	"stm32f4xx_hal.h"
 
-1537557065 source:f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\drivers\stm32f4xx_hal_driver\src\stm32f4xx_hal_flash_ramfunc.c
+1537553465 source:f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\drivers\stm32f4xx_hal_driver\src\stm32f4xx_hal_flash_ramfunc.c
 	"stm32f4xx_hal.h"
 
-1537557065 source:f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\drivers\stm32f4xx_hal_driver\src\stm32f4xx_hal_gpio.c
+1537553465 source:f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\drivers\stm32f4xx_hal_driver\src\stm32f4xx_hal_gpio.c
 	"stm32f4xx_hal.h"
 
-1537557065 source:f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\drivers\stm32f4xx_hal_driver\src\stm32f4xx_hal_pcd.c
+1537553465 source:f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\drivers\stm32f4xx_hal_driver\src\stm32f4xx_hal_pcd.c
 	"stm32f4xx_hal.h"
 
-1537557065 source:f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\drivers\stm32f4xx_hal_driver\src\stm32f4xx_hal_pcd_ex.c
+1537553465 source:f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\drivers\stm32f4xx_hal_driver\src\stm32f4xx_hal_pcd_ex.c
 	"stm32f4xx_hal.h"
 
-1537557065 source:f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\drivers\stm32f4xx_hal_driver\src\stm32f4xx_hal_pwr.c
+1537553465 source:f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\drivers\stm32f4xx_hal_driver\src\stm32f4xx_hal_pwr.c
 	"stm32f4xx_hal.h"
 
-1537557065 source:f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\drivers\stm32f4xx_hal_driver\src\stm32f4xx_hal_pwr_ex.c
+1537553465 source:f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\drivers\stm32f4xx_hal_driver\src\stm32f4xx_hal_pwr_ex.c
 	"stm32f4xx_hal.h"
 
-1537557065 source:f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\drivers\stm32f4xx_hal_driver\src\stm32f4xx_hal_rcc.c
+1537553465 source:f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\drivers\stm32f4xx_hal_driver\src\stm32f4xx_hal_rcc.c
 	"stm32f4xx_hal.h"
 
-1537557065 source:f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\drivers\stm32f4xx_hal_driver\src\stm32f4xx_hal_rcc_ex.c
+1537553465 source:f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\drivers\stm32f4xx_hal_driver\src\stm32f4xx_hal_rcc_ex.c
 	"stm32f4xx_hal.h"
 
-1537557065 source:f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\drivers\stm32f4xx_hal_driver\src\stm32f4xx_hal_sram.c
+1537553465 source:f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\drivers\stm32f4xx_hal_driver\src\stm32f4xx_hal_sram.c
 	"stm32f4xx_hal.h"
 
-1537557065 source:f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\drivers\stm32f4xx_hal_driver\src\stm32f4xx_hal_tim.c
+1537553465 source:f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\drivers\stm32f4xx_hal_driver\src\stm32f4xx_hal_tim.c
 	"stm32f4xx_hal.h"
 
-1537557065 source:f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\drivers\stm32f4xx_hal_driver\src\stm32f4xx_hal_tim_ex.c
+1537553465 source:f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\drivers\stm32f4xx_hal_driver\src\stm32f4xx_hal_tim_ex.c
 	"stm32f4xx_hal.h"
 
-1537557065 source:f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\drivers\stm32f4xx_hal_driver\src\stm32f4xx_ll_fsmc.c
+1537553465 source:f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\drivers\stm32f4xx_hal_driver\src\stm32f4xx_ll_fsmc.c
 	"stm32f4xx_hal.h"
 
-1537557065 source:f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\drivers\stm32f4xx_hal_driver\src\stm32f4xx_ll_usb.c
+1537553465 source:f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\drivers\stm32f4xx_hal_driver\src\stm32f4xx_ll_usb.c
 	"stm32f4xx_hal.h"
 
-1537557068 source:f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\middlewares\st\stm32_usb_device_library\class\cdc\src\usbd_cdc.c
+1537553468 source:f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\middlewares\st\stm32_usb_device_library\class\cdc\src\usbd_cdc.c
 	"usbd_cdc.h"
 	"usbd_desc.h"
 	"usbd_ctlreq.h"
 
-1537557068 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\middlewares\st\stm32_usb_device_library\class\cdc\inc\usbd_cdc.h
+1537553468 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\middlewares\st\stm32_usb_device_library\class\cdc\inc\usbd_cdc.h
 	"usbd_ioreq.h"
 
-1537557068 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\middlewares\st\stm32_usb_device_library\core\inc\usbd_ioreq.h
+1537553468 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\middlewares\st\stm32_usb_device_library\core\inc\usbd_ioreq.h
 	"usbd_def.h"
 	"usbd_core.h"
 
-1537557068 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\middlewares\st\stm32_usb_device_library\core\inc\usbd_def.h
+1537553468 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\middlewares\st\stm32_usb_device_library\core\inc\usbd_def.h
 	"usbd_conf.h"
 
-1537729289 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\inc\usbd_conf.h
+1537725689 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\inc\usbd_conf.h
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	"stm32f4xx.h"
 	"stm32f4xx_hal.h"
 
-1537557068 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\middlewares\st\stm32_usb_device_library\core\inc\usbd_core.h
+1537553468 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\middlewares\st\stm32_usb_device_library\core\inc\usbd_core.h
 	"usbd_conf.h"
 	"usbd_def.h"
 	"usbd_ioreq.h"
 	"usbd_ctlreq.h"
 
-1537557068 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\middlewares\st\stm32_usb_device_library\core\inc\usbd_ctlreq.h
+1537553468 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\middlewares\st\stm32_usb_device_library\core\inc\usbd_ctlreq.h
 	"usbd_def.h"
 
-1537729289 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\inc\usbd_desc.h
+1537725689 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\inc\usbd_desc.h
 	"usbd_def.h"
 
-1537557068 source:f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\middlewares\st\stm32_usb_device_library\core\src\usbd_core.c
+1537553468 source:f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\middlewares\st\stm32_usb_device_library\core\src\usbd_core.c
 	"usbd_core.h"
 
-1537557068 source:f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\middlewares\st\stm32_usb_device_library\core\src\usbd_ctlreq.c
+1537553468 source:f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\middlewares\st\stm32_usb_device_library\core\src\usbd_ctlreq.c
 	"usbd_ctlreq.h"
 	"usbd_ioreq.h"
 
-1537557068 source:f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\middlewares\st\stm32_usb_device_library\core\src\usbd_ioreq.c
+1537553468 source:f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\middlewares\st\stm32_usb_device_library\core\src\usbd_ioreq.c
 	"usbd_ioreq.h"
 
-1603186494 source:f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\src\kb_debug.c
+1603214562 source:f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\src\kb_debug.c
 	"kb_debug.h"
 	"usbd_cdc_if.h"
 
-1603184547 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\inc\kb_debug.h
+1603214562 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\inc\kb_debug.h
 	"mamachdep.h"
 
-1602876038 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\ymu762\mamachdep.h
+1614893230 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\ymu762\mamachdep.h
 
-1537984612 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\inc\usbd_cdc_if.h
+1537981012 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\inc\usbd_cdc_if.h
 	"usbd_cdc.h"
 
-1537557042 source:f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\src\startup_stm32f407xx.s
+1537553442 source:f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\src\startup_stm32f407xx.s
 
-1537729290 source:f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\src\stm32f4xx_hal_msp.c
+1537725690 source:f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\src\stm32f4xx_hal_msp.c
 	"stm32f4xx_hal.h"
 
-1537729289 source:f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\src\stm32f4xx_it.c
+1537725689 source:f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\src\stm32f4xx_it.c
 	"stm32f4xx_hal.h"
 	"stm32f4xx.h"
 	"stm32f4xx_it.h"
 
-1537729289 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\inc\stm32f4xx_it.h
+1537725689 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\inc\stm32f4xx_it.h
 	"stm32f4xx_hal.h"
 	"main.h"
 
-1537557042 source:f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\src\system_stm32f4xx.c
+1537553442 source:f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\src\system_stm32f4xx.c
 	"stm32f4xx.h"
 
-1537729289 source:f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\src\usb_device.c
+1537725689 source:f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\src\usb_device.c
 	"usb_device.h"
 	"usbd_core.h"
 	"usbd_desc.h"
 	"usbd_cdc.h"
 	"usbd_cdc_if.h"
 
-1537729289 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\inc\usb_device.h
+1537725689 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\inc\usb_device.h
 	"stm32f4xx.h"
 	"stm32f4xx_hal.h"
 	"usbd_def.h"
 
-1537984597 source:f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\src\usbd_cdc_if.c
+1537980997 source:f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\src\usbd_cdc_if.c
 	"usbd_cdc_if.h"
 
-1537729289 source:f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\src\usbd_conf.c
+1537725689 source:f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\src\usbd_conf.c
 	"stm32f4xx.h"
 	"stm32f4xx_hal.h"
 	"usbd_def.h"
 	"usbd_core.h"
 
-1537729289 source:f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\src\usbd_desc.c
+1537725689 source:f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\src\usbd_desc.c
 	"usbd_core.h"
 	"usbd_desc.h"
 	"usbd_conf.h"
 
-1050997636 source:f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\ymu762\madebug.c
+1050994036 source:f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\ymu762\madebug.c
 	"mamachdep.h"
 	"madebug.h"
 	"madefs.h"
 
-1603181465 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\ymu762\madebug.h
+1603214562 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\ymu762\madebug.h
 	<stdio.h>
 	<assert.h>
 	"stm32f4xx.h"
 	"kb_debug.h"
 
-1050997636 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\ymu762\madefs.h
+1050994036 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\ymu762\madefs.h
 
-1603209289 source:f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\ymu762\madevdrv.c
+1603214562 source:f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\ymu762\madevdrv.c
 	"madevdrv.h"
 	"kb_debug.h"
 
-1050997636 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\ymu762\madevdrv.h
+1050994036 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\ymu762\madevdrv.h
 	"mamachdep.h"
 	"madefs.h"
 	"madebug.h"
 	"masndseq.h"
 	"masnddrv.h"
 
-1528110020 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\ymu762\masndseq.h
+1528106420 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\ymu762\masndseq.h
 	"mamachdep.h"
 	"madefs.h"
 	"madebug.h"
 	"masnddrv.h"
 
-1050997636 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\ymu762\masnddrv.h
+1614975238 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\ymu762\masnddrv.h
 	"mamachdep.h"
 	"madebug.h"
 	"maresmgr.h"
 	"masndseq.h"
 	"madevdrv.h"
 
-1050997636 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\ymu762\maresmgr.h
+1050994036 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\ymu762\maresmgr.h
 	"mamachdep.h"
 	"madebug.h"
 	"madevdrv.h"
 	"madefs.h"
 
-1050997634 source:f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\ymu762\malib.c
+1050994034 source:f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\ymu762\malib.c
 	"malib.h"
 	"mammfcnv.h"
 
-1050997636 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\ymu762\malib.h
+1050994036 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\ymu762\malib.h
 	"madefs.h"
 	"mamachdep.h"
 
-1051002462 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\ymu762\mammfcnv.h
+1050998862 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\ymu762\mammfcnv.h
 
-1603133486 source:f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\ymu762\mamachdep.c
+1603214562 source:f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\ymu762\mamachdep.c
 	"mamachdep.h"
 	"madefs.h"
 	"kb_debug.h"
 
-1050997634 source:f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\ymu762\mamidcnv.c
+1050994034 source:f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\ymu762\mamidcnv.c
 	"mamidcnv.h"
 
-1050997636 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\ymu762\mamidcnv.h
+1050994036 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\ymu762\mamidcnv.h
 	"mamachdep.h"
 	"masnddrv.h"
 	"maresmgr.h"
 	"madebug.h"
 
-1050997636 source:f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\ymu762\mammfcnv.c
+1050994036 source:f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\ymu762\mammfcnv.c
 	"mamachdep.h"
 	"mammfcnv.h"
 	"madefs.h"
 	"masnddrv.h"
 	"maresmgr.h"
 
-1050997636 source:f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\ymu762\maphrcnv.c
+1050994036 source:f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\ymu762\maphrcnv.c
 	"maphrcnv.h"
 	"malib.h"
 
-1050997636 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\ymu762\maphrcnv.h
+1050994036 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\ymu762\maphrcnv.h
 	"mamachdep.h"
 	"madebug.h"
 	"masnddrv.h"
@@ -437,54 +437,54 @@
 	"mammfcnv.h"
 	"maphrwrp.h"
 
-1050997636 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\ymu762\maphrwrp.h
+1050994036 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\ymu762\maphrwrp.h
 
-1050997636 source:f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\ymu762\maresmgr.c
+1050994036 source:f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\ymu762\maresmgr.c
 	"maresmgr.h"
 
-1050997634 source:f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\ymu762\marmdcnv.c
+1050994034 source:f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\ymu762\marmdcnv.c
 	"marmdcnv.h"
 
-1050997636 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\ymu762\marmdcnv.h
+1050994036 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\ymu762\marmdcnv.h
 	"mamachdep.h"
 	"masnddrv.h"
 	"maresmgr.h"
 	"madebug.h"
 
-1050997634 source:f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\ymu762\masmwmain.c
+1050994034 source:f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\ymu762\masmwmain.c
 	"masound.h"
 	"maphrwrp.h"
 	"mamachdep.h"
 
-1050997636 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\ymu762\masound.h
+1050994036 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\ymu762\masound.h
 
-1050997636 source:f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\ymu762\masnddrv.c
+1614984855 source:f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\ymu762\masnddrv.c
 	"masnddrv.h"
 	"matable.h"
 
-1050997636 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\ymu762\matable.h
+1050994036 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\ymu762\matable.h
 
-1528110556 source:f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\ymu762\masndseq.c
+1528106956 source:f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\ymu762\masndseq.c
 	"masndseq.h"
 	"macnvprf.h"
 
-1050997636 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\ymu762\macnvprf.h
+1050994036 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\ymu762\macnvprf.h
 	"mammfcnv.h"
 	"maphrcnv.h"
 	"marmdcnv.h"
 	"mamidcnv.h"
 	"mawavcnv.h"
 
-1050997636 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\ymu762\mawavcnv.h
+1050994036 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\ymu762\mawavcnv.h
 	"mamachdep.h"
 	"masnddrv.h"
 	"maresmgr.h"
 	"madebug.h"
 
-1050997634 source:f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\ymu762\mawavcnv.c
+1050994034 source:f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\ymu762\mawavcnv.c
 	"mawavcnv.h"
 
-1603217328 source:f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\src\main.c
+1614984231 source:f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\src\main.c
 	"main.h"
 	"stm32f4xx_hal.h"
 	"usb_device.h"
@@ -492,7 +492,12 @@
 	"kb_debug.h"
 	"mamachdep.h"
 	"masound.h"
-	"MMF.h"
+	"mmf2.h"
+	"dro.h"
 
-1603217322 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\mmf\mmf.h
+1614979280 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\mmf\mmf.h
+
+1603999636 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\mmf\mmf2.h
+
+1614983655 f:\_kb_stuff\moje_projekty\ma3_ymu762_and_discovery_f407vg\mmf\dro.h
 

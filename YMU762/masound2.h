@@ -141,49 +141,75 @@ signed long	MaSound_DeviceControl	( unsigned char 	p1,
 									  unsigned char 	p2,
 									  unsigned char 	p3,
 									  unsigned char 	p4 );
+
+
 signed long	MaSound_Create			( unsigned char		srm_id );
+
+
 signed long	MaSound_Load			( signed long 		func_id,
 									  unsigned char *	file_ptr,
 									  unsigned long		file_size,
 									  unsigned char		mode,
 									  signed long (* func)(unsigned char id),
 									  void * 			ext_args );
+
+
 signed long	MaSound_Open			( signed long 		func_id,
 									  signed long		file_id,
 									  unsigned short 	open_mode,
 									  void * 			ext_args );
+
+
 signed long	MaSound_Control			( signed long 		func_id,
 									  signed long		file_id,
 									  unsigned char		ctrl_num,
 									  void * 			prm,
 									  void * 			ext_args );
+
+
 signed long	MaSound_Standby			( signed long 		func_id,
 									  signed long		file_id,
 									  void *			ext_args );
+
+
 signed long	MaSound_Seek			( signed long 		func_id,
 									  signed long		file_id,
 									  unsigned long		pos,
 									  unsigned char		flag,
 									  void * 			ext_args );
+
+
 signed long	MaSound_Start			( signed long 		func_id,
 									  signed long		file_id,
 									  unsigned short	play_mode,
 									  void * 			ext_args );
+
+
 signed long	MaSound_Pause			( signed long		func_id,
 									  signed long		file_id,
 									  void * 			ext_args );
+
+
 signed long	MaSound_Restart			( signed long		func_id,
 									  signed long		file_id,
 									  void * 			ext_args );
+
+
 signed long	MaSound_Stop			( signed long		func_id,
 									  signed long		file_id,
 									  void * 			ext_args );
+
+
 signed long	MaSound_Close			( signed long		func_id,
 									  signed long		file_id,
 									  void *			ext_args );
+
+
 signed long	MaSound_Unload			( signed long		func_id,
 									  signed long		file_id,
 									  void *			ext_args );
+
+
 signed long	MaSound_Delete			( signed long 		func_id );
 
 #if defined(__cplusplus)

@@ -24,6 +24,9 @@
  #define  NULL           ((void *)0)
 #endif
 
+#define	MA3_2OP_VOICE_PARAM_SIZE (16)
+
+
 #define MA_STOPWAIT			(0) /* default 1*/
 #define MA_PLAYMODE_CHECK	(0)
 

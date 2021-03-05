@@ -412,5 +412,23 @@ SINT32 MaSndDrv_DeviceControl	( UINT8 cmd, UINT8 param1, UINT8 param2, UINT8 par
 SINT32 MaSndDrv_UpdateSequence	( SINT32 id, UINT8 * buf_ptr, UINT32 buf_size );
 void   MaSndDrv_UpdatePos		( SINT32 id, UINT8 ctrl );
 
+SINT32 MaSndDrv_Opl2NoteOn
+(
+	UINT32	ch,							/* channel number */
+    UINT8 * voiceData                   // pitch + MA3 2OP block
+);
+
+SINT32 MaSndDrv_Opl2PitchBend
+(
+	UINT32	ch,							/* channel number */
+    UINT8 * voiceData                   // pitch
+);
+
+SINT32 MaSndDrv_Opl2NoteOff
+(
+	UINT32	ch							/* channel number */
+);
+
+
 
 #endif /*__MASNDDRV_H__*/

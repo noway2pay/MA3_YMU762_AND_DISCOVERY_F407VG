@@ -206,7 +206,7 @@ static SINT32 GetVoiceInfo
 			voice_info_ptr->synth	= ma_voice_info[seq_id][i].synth;
 			voice_info_ptr->key		= ma_voice_info[seq_id][i].key;
 			voice_info_ptr->address = (UINT16)(ma_voice_info[seq_id][i].ram_adrs >> 1);
-			
+
 			return MASMW_SUCCESS;
 		}
 	}
@@ -309,12 +309,12 @@ static UINT8 CalcVoiceVolume
  *	MakeDeltaTime
  *
  *	Description:
- *			
+ *
  *	Arguments:
  *			packet_ptr
  *			delta_time
  *	Return:
- *			
+ *
  *
  ****************************************************************************/
 static UINT32 MakeDeltaTime( UINT8 * packet_ptr, SINT32 delta_time )
@@ -322,7 +322,7 @@ static UINT32 MakeDeltaTime( UINT8 * packet_ptr, SINT32 delta_time )
 	UINT32	num = 0;
 
 	if ( delta_time < 0 ) return num;
-	
+
 	while ( ( delta_time > 127 ) && ( num < 2 ) )
 	{
 		*(packet_ptr+num) = (UINT8)(delta_time & 0x7F);
@@ -330,7 +330,7 @@ static UINT32 MakeDeltaTime( UINT8 * packet_ptr, SINT32 delta_time )
 		num++;
 	}
 	*(packet_ptr+num) = (UINT8)(delta_time | 0x80 );
-	
+
 	return (UINT32)(num+1);
 }
 /****************************************************************************
@@ -393,7 +393,7 @@ static UINT32 SearchSlotList
 
 	min_slot = ma_snddrv_info[seq_id].min_slot[synth_type];
 	max_slot = ma_snddrv_info[seq_id].max_slot[synth_type];
-	
+
 	slot_no = ma_slot_list[seq_id].top[synth_type];
 	for ( i = min_slot; i <= max_slot; i++ )
 	{
@@ -436,7 +436,7 @@ static void RemakeSlotList
 	UINT32	min_slot;
 	UINT32	max_slot;
 	UINT32	i;
-	
+
 	min_slot = ma_snddrv_info[seq_id].min_slot[synth_type];
 	max_slot = ma_snddrv_info[seq_id].max_slot[synth_type];
 
@@ -471,7 +471,7 @@ static void RemakeSlotList
 				{
 					ma_slot_list[seq_id].end[synth_type] = (UINT8)nxt_slot;
 				}
-				
+
 				ma_slot_list[seq_id].next[nxt_slot] = (UINT8)temp;
 				break;
 			}
@@ -668,7 +668,7 @@ static UINT32 SearchSlotMa2
  *	GetStreamBlockFnum
  *
  *	Description:
- *			
+ *
  *	Arguments:
  *			seq_id		sequence id
  *			wave_id		wave id
@@ -709,7 +709,7 @@ static UINT16 GetStreamBlockFnum
 			            | ( f_num       & 0x007F) );
 
 	MASNDDRV_DBGMSG(("  GetStreamPitchFnum[%d] = %04X\n", wave_id, fix_pitch));
-	
+
 	return fix_pitch;
 }
 /****************************************************************************
@@ -735,10 +735,10 @@ static UINT8 GetRealKeyMelody
 	SINT16	rkey;						/* real key value */
 	SINT16	key_offset;					/* key offset */
 	UINT32	prog_no;
-	
+
 	rkey = (SINT16)key;
 	key_offset = (SINT16)ma_snddrv_info[seq_id].key_offset;
-	
+
 	switch ( ma_snddrv_info[seq_id].melody_mode )
 	{
 	case 0:
@@ -830,10 +830,10 @@ static UINT8 GetRealKeyDrum
 {
 	SINT16	rkey;						/* real key value */
 	SINT16	key_offset;					/* key offset */
-	
+
 	rkey = (SINT16)key;
 	key_offset = (SINT16)ma_snddrv_info[seq_id].key_offset;
-	
+
 	if ( ma_channel_info[ch].key_control == MA_KEYCTRL_ON )
 	{
 		rkey = (SINT16)( rkey + key_offset );
@@ -883,7 +883,7 @@ static UINT16 GetFmBlockFnum
 		switch ( ma_snddrv_info[seq_id].melody_mode )
 		{
 		case 0:
-			
+
 			if ( prog_no <= 114 )									/* 1..114 */
 			{
 				pitch = ma_fm_block_100[rkey];
@@ -925,7 +925,7 @@ static UINT16 GetFmBlockFnum
 				pitch = ma_fm_block_100[rkey];
 			}
 			break;
-			
+
 		case 1:
 		default:
 			pitch = ma_fm_block_100[rkey];
@@ -974,7 +974,7 @@ static UINT16 GetFmBlockFnumMa2
 	MASMW_ASSERT( key >= 0x80000000 );
 
 	/* compatible mode */
-		
+
 	block = (key >> 10) & 0x0007;
 	fnum  =  key        & 0x03FF;
 
@@ -990,7 +990,7 @@ static UINT16 GetFmBlockFnumMa2
 		fnum >>= 1;
 		if ( block < 7 ) block++;
 	}
-		
+
 	pitch = (UINT16)( ((fnum  << 3) & 0x1C00)
 		            | ((block << 7) & 0x0380)
 		            | ( fnum        & 0x007F) );
@@ -1042,7 +1042,7 @@ static UINT16 GetWtBlockFnum
 		switch ( ma_snddrv_info[seq_id].melody_mode )
 		{
 		case 0:
-			
+
 			switch ( ma_channel_info[ch].prog_no )
 			{
 			case 115:	rate = ma_wt_block_50a[rkey];		break;
@@ -1059,7 +1059,7 @@ static UINT16 GetWtBlockFnum
 			default:	rate = ma_wt_block_100[rkey];		break;
 			}
 			break;
-			
+
 		case 1:
 		default:
 			rate = ma_wt_block_100[rkey];
@@ -1124,19 +1124,19 @@ static SINT32 MakeStreamAudioParam
 	UINT8	sa_id = 0;
 	UINT8	vo_volume = 0;
 	static UINT8 wave_mode[4] = { 0, 0, 2, 3 };
-	
+
 	(void)ch;							/* for unused warning message */
-	
+
 	if ( ma_stream_info[seq_id][wave_id].frequency == 0 )
 	{
 		return MASMW_ERROR;
 	}
-	
+
 	format = ma_stream_info[seq_id][wave_id].format;
 	panpot = ma_stream_info[seq_id][wave_id].pan;
-	
+
 	ma_snddrv_info[seq_id].wave_velocity = (UINT8)velocity;
-	
+
 	db = db_table[velocity];
 	velocity = vol_table[db];
 
@@ -1158,7 +1158,7 @@ static SINT32 MakeStreamAudioParam
 			}
 			vo_volume = CalcVoiceVolume( seq_id, velocity, (UINT8)(12 << 1) );	/* +12dB */
 			break;
-			
+
 		case 2:
 			sa_id = 0;
 			vo_volume = CalcVoiceVolume( seq_id, velocity, (UINT8)0 );
@@ -1206,7 +1206,7 @@ static SINT32 AlternateAssign
 	UINT8	alt_assign;					/* alternate assign flag */
 	SINT32	dt0;						/* delta time 0 */
 	SINT32	dt1;						/* delta time 1 */
-	
+
 
 	alt_assign = 0;
 
@@ -1226,7 +1226,7 @@ static SINT32 AlternateAssign
 			}
 
 			alt_assign++;
-			
+
 			switch ( key )
 			{
 			case 42:	MaSndDrv_NoteOff( seq_id, dt0, ch, 44, 0 );
@@ -1299,7 +1299,7 @@ SINT32 MaSndDrv_UpdateSequence
 	{
 		return 0;
 	}
-	
+
 	switch ( seq_id )
 	{
 	case MASMW_SEQTYPE_DELAYED:
@@ -1316,7 +1316,7 @@ SINT32 MaSndDrv_UpdateSequence
 				machdep_memcpy( ma_seqbuf_info.buf_ptr, &ma_seqbuf_info.queue[read_ptr], buf_size );
 
 				ma_seqbuf_info.queue_size -= buf_size;
-				
+
 				return (SINT32)buf_size;
 			}
 			else
@@ -1362,11 +1362,11 @@ SINT32 MaSndDrv_UpdateSequence
 	case MASMW_SEQTYPE_DIRECT:
 
 		result = ma_srm_cnv[seq_id]();
-		
+
 		break;
-		
+
 	default:
-	
+
 		result = 1;
 		break;
 	}
@@ -1406,10 +1406,10 @@ static SINT32 MaSndDrv_Nop
 	UINT32	num;						/* number of packet data */
 	UINT32	reg_index;					/* register index number */
 	SINT32	result;						/* result of function */
-	
+
 	(void)p2;							/* for unused warning message */
 	(void)p3;
-	
+
 	MASNDDRV_DBGMSG((" MaSndDrv_Nop: id=%ld dt=%ld tp=%ld\n", seq_id, delta_time, type));
 
 	/* check arguments */
@@ -1425,7 +1425,7 @@ static SINT32 MaSndDrv_Nop
 	packet_buf[seq_id][num++] = (UINT8)(  reg_index       & 0x7F );		/* address part */
 	packet_buf[seq_id][num++] = (UINT8)( (reg_index >> 7) | 0x80 );
 	packet_buf[seq_id][num++] = (UINT8)0x80;							/* data part */
-	
+
 	if ( delta_time < 0 )				/* direct command */
 	{
 		result = MaDevDrv_SendDirectPacket( &packet_buf[seq_id][0], num );
@@ -1546,7 +1546,7 @@ static SINT32 MaSndDrv_NoteOff
 	MAVINFO	voice_info;					/* voice information */
 
 	(void)p3;							/* for unused warning message */
-	
+
 	MASNDDRV_DBGMSG((" MaSndDrv_NoteOff: id=%ld dt=%ld ch=%ld key=%ld\n", seq_id, delta_time, ch, key));
 
 	/* check arguments */
@@ -1675,7 +1675,7 @@ static SINT32 MaSndDrv_NoteOffMa2
 	MAVINFO	voice_info;					/* voice information */
 
 	(void)p3;							/* for unused warning message */
-	
+
 	MASNDDRV_DBGMSG((" MaSndDrv_NoteOffMa2: id=%ld dt=%ld ch=%ld key=%ld\n", seq_id, delta_time, ch, key));
 
 	/* check arguments */
@@ -1784,7 +1784,7 @@ static SINT32 MaSndDrv_NoteOffMa2Ex
 	MAVINFO	voice_info;					/* voice information */
 
 	(void)p3;							/* for unused warning message */
-	
+
 	MASNDDRV_DBGMSG((" MaSndDrv_NoteOffMa2Ex: id=%ld dt=%ld ch=%ld key=%ld\n", seq_id, delta_time, ch, key));
 
 	/* check arguments */
@@ -1899,7 +1899,7 @@ static SINT32 MaSndDrv_NoteOn
 	UINT32	pitch;						/* pitch */
 	SINT32	result;						/* result of function */
 	MAVINFO	voice_info;					/* voice information */
-	
+
 	MASNDDRV_DBGMSG((" MaSndDrv_NoteOn: id=%ld dt=%ld ch=%ld key=%ld vel=%ld\n", seq_id, delta_time, ch, key, velocity));
 
 	/* check arguments */
@@ -1947,7 +1947,7 @@ static SINT32 MaSndDrv_NoteOn
 			slot_no = ma_channel_info[ch].slot_no;
 			RemakeSlotListE( seq_id, (UINT8)(voice_info.synth - 1), slot_no );
 		}
-	
+
 		ma_channel_info[ch].note_on++;
 	}
 
@@ -2107,7 +2107,7 @@ static SINT32 MaSndDrv_NoteOnMa2
 	UINT32	pitch;						/* pitch */
 	SINT32	result;						/* result of function */
 	MAVINFO	voice_info;					/* voice information */
-	
+
 	MASNDDRV_DBGMSG((" MaSndDrv_NoteOnMa2: id=%ld dt=%ld ch=%ld key=%ld vel=%ld\n", seq_id, delta_time, ch, key, velocity));
 
 	/* check arguments */
@@ -2249,7 +2249,7 @@ static SINT32 MaSndDrv_NoteOnMa2Ex
 	UINT32	pitch;						/* pitch */
 	SINT32	result;						/* result of function */
 	MAVINFO	voice_info;					/* voice information */
-	
+
 	MASNDDRV_DBGMSG((" MaSndDrv_NoteOnMa2Ex: id=%ld dt=%ld ch=%ld key=%ld vel=%ld\n", seq_id, delta_time, ch, key, velocity));
 
 	/* check arguments */
@@ -2383,10 +2383,10 @@ static SINT32 MaSndDrv_ProgramChange
 )
 {
 	SINT32	result;						/* result of function */
-	
+
 	(void)seq_id;						/* for unused warning message */
 	(void)delta_time;
-	
+
 	MASNDDRV_DBGMSG((" MaSndDrv_ProgramChange: id=%ld dt=%ld ch=%ld bn=%ld pn=%ld\n", seq_id, delta_time, ch, bank_no, program_no ));
 
 	/* check arguments */
@@ -2441,9 +2441,9 @@ static SINT32 MaSndDrv_ModulationDepth
 	UINT32	reg_index;					/* register index number */
 	SINT32	result;						/* result of function */
 	static const UINT8 xvb[8] = { 0, 1, 2, 4, 6, 0, 0, 0 };
-	
+
 	(void)p3;							/* for unused warning message */
-	
+
 	MASNDDRV_DBGMSG((" MaSndDrv_ModulationDepth: id=%ld dt=%ld ch=%ld dp=%ld\n", seq_id, delta_time, ch, depth ));
 
 	/* check arguments */
@@ -2466,7 +2466,7 @@ static SINT32 MaSndDrv_ModulationDepth
 
 	MAKE_ADDRESS_PART( seq_id, num, reg_index )
 	MAKE_SFX( seq_id, num, sfx )
-	
+
 	if ( delta_time < 0 )				/* direct command */
 	{
 		result = MaDevDrv_SendDirectPacket( &packet_buf[seq_id][0], num );
@@ -2506,9 +2506,9 @@ static SINT32 MaSndDrv_ChannelVolume
 	UINT32	num;						/* number of packet data */
 	UINT32	reg_index;					/* register index number */
 	SINT32	result;						/* result of function */
-	
+
 	(void)p3;							/* for unused warning message */
-	
+
 	MASNDDRV_DBGMSG((" MaSndDrv_ChannelVolume: id=%ld dt=%ld ch=%ld vol=%ld\n", seq_id, delta_time, ch, vol ));
 
 	/* check arguments */
@@ -2529,7 +2529,7 @@ static SINT32 MaSndDrv_ChannelVolume
 
 	MAKE_ADDRESS_PART( seq_id, num, reg_index )
 	MAKE_CHANNEL_VOLUME( seq_id, num, volume )
-	
+
 	if ( delta_time < 0 )				/* direct command */
 	{
 		result = MaDevDrv_SendDirectPacket( &packet_buf[seq_id][0], num );
@@ -2568,9 +2568,9 @@ static SINT32 MaSndDrv_Panpot
 	UINT32	num;						/* number of packet data */
 	UINT32	reg_index;					/* register index number */
 	SINT32	result;						/* result of function */
-	
+
 	(void)p3;							/* for unused warning message */
-	
+
 	MASNDDRV_DBGMSG((" MaSndDrv_Panpot: id=%ld dt=%ld ch=%ld pan=%ld\n", seq_id, delta_time, ch, pan ));
 
 	/* check arguments */
@@ -2586,7 +2586,7 @@ static SINT32 MaSndDrv_Panpot
 
 	MAKE_ADDRESS_PART( seq_id, num, reg_index )
 	MAKE_PANPOT( seq_id, num, pan )
-	
+
 	if ( delta_time < 0 )				/* direct command */
 	{
 		result = MaDevDrv_SendDirectPacket( &packet_buf[seq_id][0], num );
@@ -2626,13 +2626,13 @@ static SINT32 MaSndDrv_Expression
 	UINT32	num;						/* number of packet data */
 	UINT32	reg_index;					/* register index number */
 	SINT32	result;						/* result of function */
-	
+
 	(void)p3;							/* for unused warning message */
-	
+
 	MASNDDRV_DBGMSG((" MaSndDrv_Expression: id=%ld dt=%ld ch=%ld vol=%ld\n", seq_id, delta_time, ch, vol ));
 
 	/* check arguments */
-	
+
 	MASMW_ASSERT( ch <= MASMW_MAX_CHANNEL );
 	MASMW_ASSERT( vol <= MASMW_MAX_VOLUME );
 
@@ -2689,9 +2689,9 @@ static SINT32 MaSndDrv_Hold1
 	UINT32	num;						/* number of packet data */
 	UINT32	reg_index;					/* register index number */
 	SINT32	result;						/* result of function */
-	
+
 	(void)p3;							/* for unused warning message */
-	
+
 	MASNDDRV_DBGMSG((" MaSndDrv_Hold1: id=%ld dt=%ld ch=%ld val=%ld\n", seq_id, delta_time, ch, val ));
 
 	/* check arguments */
@@ -2700,7 +2700,7 @@ static SINT32 MaSndDrv_Hold1
 	MASMW_ASSERT( val <= MASMW_MAX_HOLD1 );
 
 	/* updata channel information */
-	
+
 	sfx = (UINT8)( (ma_channel_info[ch].sfx & MASMW_MASK_SUS) | ((val & 0x01) << 4) );
 	ma_channel_info[ch].sfx = sfx;
 
@@ -2712,7 +2712,7 @@ static SINT32 MaSndDrv_Hold1
 
 	MAKE_ADDRESS_PART( seq_id, num, reg_index )
 	MAKE_SFX( seq_id, num, sfx )
-	
+
 	if ( delta_time < 0 )				/* direct command */
 	{
 		result = MaDevDrv_SendDirectPacket( &packet_buf[seq_id][0], num );
@@ -2759,10 +2759,10 @@ static SINT32 MaSndDrv_AllSoundOff
 	UINT32	res_map;					/* bit mapping of resource */
 	SINT32	result = MASMW_SUCCESS;		/* result of packet sending */
 	SINT32	dt;
-	
+
 	(void)p2;							/* for unused warning message */
 	(void)p3;
-	
+
 	MASNDDRV_DBGMSG((" MaSndDrv_AllSoundOff: id=%ld dt=%ld ch=%ld\n", seq_id, delta_time, ch ));
 
 	MASMW_ASSERT( ch <= MASMW_MAX_CHANNEL );
@@ -2773,7 +2773,7 @@ static SINT32 MaSndDrv_AllSoundOff
 	/* FM & WT */
 
 	tnum = 0;
-	
+
 	for ( synth_type = 0; synth_type < 2; synth_type++ )
 	{
 		min_slot = ma_snddrv_info[seq_id].min_slot[synth_type];
@@ -2895,14 +2895,14 @@ static SINT32 MaSndDrv_ResetAllControllers
 	UINT32	num;						/* number of packet data */
 	UINT32	reg_index;					/* register index number */
 	SINT32	result;						/* result of function */
-	
+
 	(void)p2;							/* for unused warning message */
 	(void)p3;
-	
+
 	MASNDDRV_DBGMSG((" MaSndDrv_ResetAllControllers: id=%ld dt=%ld ch=%ld\n", seq_id, delta_time, ch ));
 
 	/* check arguments */
-	
+
 	MASMW_ASSERT( ch <= MASMW_MAX_CHANNEL );
 
 	/* updata channel information */
@@ -2980,10 +2980,10 @@ static SINT32 MaSndDrv_AllNoteOff
 	UINT32	res_map;					/* bit mapping of resource */
 	SINT32	result = MASMW_SUCCESS;		/* result of packet sending */
 	SINT32	dt;
-	
+
 	(void)p2;							/* for unused warning message */
 	(void)p3;
-	
+
 	MASNDDRV_DBGMSG((" MaSndDrv_AllNoteOff: id=%ld dt=%ld ch=%ld\n", seq_id, delta_time, ch ));
 
 	MASMW_ASSERT( ch <= MASMW_MAX_CHANNEL );
@@ -2994,7 +2994,7 @@ static SINT32 MaSndDrv_AllNoteOff
 	/* FM & WT */
 
 	tnum = 0;
-	
+
 	for ( synth_type = 0; synth_type < 2; synth_type++ )
 	{
 		min_slot = ma_snddrv_info[seq_id].min_slot[synth_type];
@@ -3113,7 +3113,7 @@ static SINT32 MaSndDrv_MonoModeOn
 	(void)delta_time;
 	(void)p2;
 	(void)p3;
-	
+
 	MASNDDRV_DBGMSG((" MaSndDrv_MonoModeOn: id=%ld dt=%ld ch=%ld\n", seq_id, delta_time, ch ));
 
 	/* check argument */
@@ -3161,12 +3161,12 @@ static SINT32 MaSndDrv_PolyModeOn
 )
 {
 	SINT32	result;						/* result of function */
-	
+
 	(void)seq_id;						/*for unused warning message */
 	(void)delta_time;
 	(void)p2;
 	(void)p3;
-	
+
 	MASNDDRV_DBGMSG((" MaSndDrv_PolyModeOn: id=%ld dt=%ld ch=%ld\n", seq_id, delta_time, ch ));
 
 	/* check argument */
@@ -3235,12 +3235,12 @@ static SINT32 MaSndDrv_PitchBend
 	/* Make packet data and send it */
 
 	num = MakeDeltaTime( &packet_buf[seq_id][0], delta_time );
-	
+
 	reg_index = (UINT32)(MA_CHANNEL_BEND + ch * 2);
 
 	MAKE_ADDRESS_PART( seq_id, num, reg_index )
 	MAKE_PITCH_BEND( seq_id, num, pitch_bend )
-	
+
 	if ( delta_time < 0 )				/* direct command */
 	{
 		result = MaDevDrv_SendDirectPacket( &packet_buf[seq_id][0], num );
@@ -3256,7 +3256,7 @@ static SINT32 MaSndDrv_PitchBend
  *	MaSndDrv_BendRange
  *
  *	Description:
- *			
+ *
  *	Arguments:
  *			seq_id		sequence id (0..2)
  *			delta_time	delta time [tick]
@@ -3277,7 +3277,7 @@ static SINT32 MaSndDrv_BendRange
 )
 {
 	SINT32	result;						/* result of function */
-	
+
 	(void)p3;							/* for unused warning message */
 
 	MASNDDRV_DBGMSG((" MaSndDrv_BendRange: id=%ld dt=%ld ch=%ld br=%ld\n", seq_id, delta_time, ch, bend_range ));
@@ -3385,7 +3385,7 @@ static SINT32 MaSndDrv_StreamOn
 	UINT32	ram_adrs;					/* ram address */
 	SINT32	result;						/* result of function */
 	MASTREAMPARAM	stream_param;		/* parameter of stream audio */
-	
+
 	MASNDDRV_DBGMSG((" MaSndDrv_StreamOn: id=%ld dt=%ld ch=%ld id=%ld vol=%ld\n", seq_id, delta_time, ch, wave_id, velocity ));
 
 	/* check arguments */
@@ -3411,7 +3411,7 @@ static SINT32 MaSndDrv_StreamOn
 
 
 	num = MakeDeltaTime( &packet_buf[seq_id][0], delta_time );
-	
+
 	ram_adrs = (UINT16)(MA_RAM_START_ADDRESS + (7-stream_param.sa_id) * MA_RAM_BLOCK_SIZE);
 	start_adrs = (UINT16)( ram_adrs + 0x20 );
 
@@ -3488,7 +3488,7 @@ static SINT32 MaSndDrv_StreamOn
  *	MaSndDrv_StreamOff
  *
  *	Description:
- *			
+ *
  *	Arguments:
  *			seq_id		sequence id (0..2)
  *			delta_time	delta time [tick]
@@ -3496,7 +3496,7 @@ static SINT32 MaSndDrv_StreamOn
  *			wave_id		wave id number (0..31)
  *			p3
  *	Return:
- *			
+ *
  *
  ****************************************************************************/
 static SINT32 MaSndDrv_StreamOff
@@ -3529,7 +3529,7 @@ static SINT32 MaSndDrv_StreamOff
 
 		return MASMW_SUCCESS;
 	}
-	
+
 	switch ( ma_snddrv_info[seq_id].dva_mode )
 	{
 	case 0:
@@ -3547,7 +3547,7 @@ static SINT32 MaSndDrv_StreamOff
 		}
 		sa_id -= 40;
 		break;
-			
+
 	case 2:
 		sa_id = 0;
 		break;
@@ -3641,7 +3641,7 @@ static SINT32 MaSndDrv_StreamSlave
 
 
 	num = MakeDeltaTime( &packet_buf[seq_id][0], delta_time );
-	
+
 	ram_adrs = (UINT16)(MA_RAM_START_ADDRESS + (7-stream_param.sa_id) * MA_RAM_BLOCK_SIZE);
 	start_adrs = (UINT16)( ram_adrs + 0x20 );
 
@@ -3753,7 +3753,7 @@ static SINT32 MaSndDrv_MasterVolume
 		velocity = vol_table[db];
 
 		num = MakeDeltaTime( &packet_buf[seq_id][0], delta_time );
-		
+
 		reg_index = (UINT32)(MA_WT_VOICE_ADDRESS + (7 * 6) + 2);
 		MAKE_ADDRESS_PART( seq_id, num, reg_index )
 		MAKE_CHANNEL_VOLUME( seq_id, num, velocity );
@@ -3814,7 +3814,7 @@ static SINT32 MaSndDrv_SystemOn
 	(void)p1;							/* for unused warning message */
 	(void)p2;
 	(void)p3;
-	
+
 	MASNDDRV_DBGMSG((" MaSndDrv_SystemOn: id=%ld dt=%ld\n", seq_id, delta_time ));
 
 
@@ -3856,7 +3856,7 @@ static SINT32 MaSndDrv_SystemOn
 	num = MakeDeltaTime( &packet_buf[seq_id][0], delta_time );
 
 	/* channel volume */
-	
+
 	reg_index = (UINT32)( MA_CHANNEL_VOLUME + min_ch );
 	MAKE_ADDRESS_PART( seq_id, num, reg_index )
 
@@ -3867,7 +3867,7 @@ static SINT32 MaSndDrv_SystemOn
 	}
 	volume = CalcChVolume( ch );
 	packet_buf[seq_id][num++] = (UINT8)( (volume & 0x7C) | 0x80 );
-	
+
 	/* panpot - 64(center) */
 
 	reg_index = (UINT32)( MA_CHANNEL_PANPOT + min_ch );
@@ -3917,7 +3917,7 @@ static SINT32 MaSndDrv_SystemOn
 			MAKE_ADDRESS_PART( seq_id, num, reg_index )
 			MAKE_LED( seq_id, num, 0 )
 		}
-		
+
 		/* Motor */
 		if ( ma_mtr_info.ctrl == 2 )
 		{
@@ -3967,7 +3967,7 @@ static SINT32 MaSndDrv_LedOn
 	UINT32	num;						/* number of packet data */
 	UINT32	reg_index;					/* register index number */
 	SINT32	result;						/* result of function */
-	
+
 	(void)p1;							/* for unused warning message */
 	(void)p2;
 	(void)p3;
@@ -3986,7 +3986,7 @@ static SINT32 MaSndDrv_LedOn
 		reg_index = (UINT32)MA_LED_CTRL;
 		MAKE_ADDRESS_PART( seq_id, num, reg_index )
 		MAKE_LED( seq_id, num, 1 )
-	
+
 		if ( delta_time < 0 )			/* direct command */
 		{
 			result = MaDevDrv_SendDirectPacket( &packet_buf[seq_id][0], num );
@@ -4037,7 +4037,7 @@ static SINT32 MaSndDrv_LedOff
 	(void)p1;							/* for unused warning message */
 	(void)p2;
 	(void)p3;
-	
+
 	MASNDDRV_DBGMSG((" MaSndDrv_LedOff: id=%ld dt=%ld\n", seq_id, delta_time ));
 
 	/* Only allowed to delayed sequence. */
@@ -4114,11 +4114,11 @@ static SINT32 MaSndDrv_MotorOn
 	{
 
 		num = MakeDeltaTime( &packet_buf[seq_id][0], delta_time );
-		
+
 		reg_index = (UINT32)MA_MOTOR_CTRL;
 		MAKE_ADDRESS_PART( seq_id, num, reg_index )
 		MAKE_MOTOR( seq_id, num, 1 )
-	
+
 		if ( delta_time < 0 )			/* direct command */
 		{
 			result = MaDevDrv_SendDirectPacket( &packet_buf[seq_id][0], num );
@@ -4135,7 +4135,7 @@ static SINT32 MaSndDrv_MotorOn
 		else
 			result = MASMW_SUCCESS;
 	}
-	
+
 	return result;
 }
 /****************************************************************************
@@ -4184,7 +4184,7 @@ static SINT32 MaSndDrv_MotorOff
 		reg_index = (UINT32)MA_MOTOR_CTRL;
 		MAKE_ADDRESS_PART( seq_id, num, reg_index )
 		MAKE_MOTOR( seq_id, num, 0 )
-	
+
 		if ( delta_time < 0 )			/* direct command */
 		{
 			result = MaDevDrv_SendDirectPacket( &packet_buf[seq_id][0], num );
@@ -4261,7 +4261,7 @@ static SINT32 MaSndDrv_StreamSeek
  *	MaSndDrv_SetCommand
  *
  *	Description:
- *			
+ *
  *	Arguments:
  *			seq_id		sequence id (0..2)
  *			delta_time	delta time [tick]
@@ -4285,7 +4285,7 @@ SINT32 MaSndDrv_SetCommand
 )
 {
 	SINT32	result;						/* result of function */
-	
+
 	MASNDDRV_DBGMSG(("MaSndDrv_SetCommand: id=%ld dt=%ld cmd=%ld p1=%ld p2=%ld p3=%ld\n", seq_id, delta_time, cmd, param1, param2, param3 ));
 
 	MASMW_ASSERT( seq_id <= MASMW_MAX_SEQTYPE );
@@ -4312,7 +4312,7 @@ SINT32 MaSndDrv_SetCommand
 
 	cmd &= MASMW_MASK_COMMAND;
 	result = ma_snddrv_command[cmd]( seq_id, delta_time, param1, param2, param3 );
-	
+
 	return result;
 }
 /****************************************************************************
@@ -4365,7 +4365,7 @@ static SINT32 MaSndDrv_SeekControl
  *	MaSndDrv_ControlSequencer
  *
  *	Description:
- *			
+ *
  *	Arguments:
  *			seq_id		sequence id
  *			ctrl		control value
@@ -4488,13 +4488,13 @@ SINT32 MaSndDrv_ControlSequencer
 		break;
 
 	case 2:
-	
+
 		ma_control_sequencer[seq_id] = 1;
 		result = MASMW_SUCCESS;
 		break;
 
 	case 3:
-	
+
 		ma_control_sequencer[seq_id] = 0;
 		result = MASMW_SUCCESS;
 		break;
@@ -4581,7 +4581,7 @@ SINT32 MaSndDrv_ControlSequencer
  *	MaSndDrv_SetFmExtWave
  *
  *	Description:
- *			
+ *
  *	Arguments:
  *			seq_id
  *			wave_no
@@ -4601,7 +4601,7 @@ SINT32 MaSndDrv_SetFmExtWave
 	UINT8	packet[4];
 	UINT32	reg_index;
 	SINT32	result;
-	
+
 	MASNDDRV_DBGMSG(("MaSndDrv_SetFmExtVoice: id=%ld wn=%d ad=%08lx\n", seq_id, wave_no, ram_adrs));
 
 	if ( seq_id > MASMW_MAX_SEQTYPE )			return MASMW_ERROR_ID;
@@ -4625,7 +4625,7 @@ SINT32 MaSndDrv_SetFmExtWave
 	packet[3] = (UINT8)(  ram_adrs        | 0x80 );
 
 	result = MaDevDrv_SendDirectPacket( packet, 4 );
-	
+
 	return result;
 }
 /****************************************************************************
@@ -4651,9 +4651,9 @@ SINT32 MaSndDrv_SetVolume
 
 	if ( seq_id > MASMW_MAX_SEQTYPE ) return MASMW_ERROR_ID;
 	if ( volume > MASMW_MAX_VOLUME ) return MASMW_ERROR_ARGUMENT;
-	
+
 	ma_snddrv_info[seq_id].ctrl_volume = volume;
-	
+
 	return MASMW_SUCCESS;
 }
 /****************************************************************************
@@ -4737,7 +4737,7 @@ SINT32 MaSndDrv_SetVoice
 				ma_voice_info[seq_id][i].key	  	= (UINT16)real_key;
 				ma_voice_info[seq_id][i].ram_adrs	= (UINT16)ram_adrs;
 				ma_voice_index[bank_prog] = (UINT8)i;
-			} 
+			}
 			else
 			{
 				for ( i = 0; i < (MA_MAX_REG_VOICE * 2 - 1); i++ )
@@ -5197,7 +5197,7 @@ SINT32 MaSndDrv_Free
 		MaResMgr_FreeSequencer( 0 );
 		MaResMgr_FreeTimer( 2 );
 		break;
-		
+
 	case MASMW_SEQTYPE_DIRECT:
 
 		MaResMgr_FreeSequencer( 1 );
@@ -5209,7 +5209,7 @@ SINT32 MaSndDrv_Free
 		MaDevDrv_SetAudioMode( 0 );
 		MaDevDrv_StopSequencer( 2, 1 );
 		break;
-		
+
 	default:
 		return MASMW_ERROR_ARGUMENT;
 	}
@@ -5289,7 +5289,7 @@ SINT32 MaSndDrv_Create
 	static UINT32 msk_map[3] = { 0xFFFFFFFF, 0xFFFFFF7F, 0xFFFFFF3F };
 
 	MASNDDRV_DBGMSG(("MaSndDrv_Create: st=%d tm=%d cm=%02x rm=%d sa=%d\n", seq_type, time_base, cnv_mode, res_mode, sa_num));
-	
+
 	if ( seq_type > MASMW_MAX_SEQTYPE ) return MASMW_ERROR_ARGUMENT;
 	if ( cnv_mode > MASMW_MAX_CNVMODE ) return MASMW_ERROR_ARGUMENT;
 	if ( res_mode > MASMW_MAX_RESMODE ) return MASMW_ERROR_ARGUMENT;
@@ -5332,7 +5332,7 @@ SINT32 MaSndDrv_Create
 			return result;
 		}
 
-		if ( time_base == MASMW_DIRECT_BASETIME ) 
+		if ( time_base == MASMW_DIRECT_BASETIME )
 		{
 			result = MaResMgr_AllocTimer( 0, 0x1B, 20, 0, 0 );	/* 0.999 * 20 [ms] */
 			if ( result != MASMW_SUCCESS )
@@ -5443,7 +5443,7 @@ SINT32 MaSndDrv_Create
 		default:
 			break;
 		}
-		
+
 		if ( ( res_flag & (1 << 0) ) != 0 )	MaResMgr_FreeCh( ch_map );
 		if ( ( res_flag & (1 << 1) ) != 0 )	MaResMgr_FreeFmVoice( fm_map );
 		if ( ( res_flag & (1 << 2) ) != 0 )	MaResMgr_FreeFmVoice( fm_ext_map );
@@ -5452,7 +5452,7 @@ SINT32 MaSndDrv_Create
 		if ( ( res_flag & (1 << 5) ) != 0 )	MaResMgr_FreeStreamAudio( sa_map );
 		if ( ( res_flag & (1 << 6) ) != 0 )	MaResMgr_FreeLed( ld_map );
 		if ( ( res_flag & (1 << 7) ) != 0 )	MaResMgr_FreeMotor( mt_map );
-		
+
 		return MASMW_ERROR_RESOURCE_OVER;
 	}
 
@@ -5592,7 +5592,7 @@ SINT32 MaSndDrv_Create
 	{
 		ma_stream_info[seq_type][i].frequency = (UINT16)0;
 	}
-	
+
 	ma_srm_cnv[seq_type] 	= srm_cnv;
 
 	ma_control_sequencer[seq_type]	= 0;
@@ -5614,7 +5614,7 @@ SINT32 MaSndDrv_Create
 		break;
 
 	case MASMW_SEQTYPE_AUDIO:
-	
+
 		MaDevDrv_SetAudioMode( 1 );
 		break;
 
@@ -5695,7 +5695,7 @@ SINT32 MaSndDrv_DeviceControl
 	static UINT8 led_off[3] = { 0x46, 0x82, 0x80 };
 	static UINT8 mtr_on[3]  = { 0x47, 0x82, 0x81 };
 	static UINT8 mtr_off[3] = { 0x47, 0x82, 0x80 };
-	
+
 	MASNDSEQ_DBGMSG(("MaSndDrv_DeviceControl: cmd=%d p1=%d p2=%d p3=%d\n", cmd, param1, param2, param3));
 
 	if ( cmd <= MASMW_SP_VOLUME )
@@ -5707,7 +5707,7 @@ SINT32 MaSndDrv_DeviceControl
 		switch ( cmd )
 		{
 		case MASMW_LED_MASTER:
-		
+
 			if ( param1 > MASMW_MAX_LED_MASTER ) return MASMW_ERROR_ARGUMENT;
 
 			ma_led_info.ctrl = param1;
@@ -5716,18 +5716,18 @@ SINT32 MaSndDrv_DeviceControl
 			{
 			case 0:		ma_led_info.dsw = 0;	break;		/* OFF */
 			case 1:		ma_led_info.dsw = 0;	break;		/* direct */
-			case 2:		
+			case 2:
 				ma_led_info.dsw = 1;						/* sequence */
 				result = MaDevDrv_SendDirectPacket( led_off, 3 );
 				break;
 			}
 
 			break;
-	
+
 		case MASMW_LED_BLINK:
 
 			if ( param1 > MASMW_MAX_LED_BLINK ) return MASMW_ERROR_ARGUMENT;
-	
+
 			if ( param1 == 0 )
 			{
 				ma_led_info.blink = 4;
@@ -5737,21 +5737,21 @@ SINT32 MaSndDrv_DeviceControl
 				ma_led_info.blink = 5;
 				ma_led_info.freq = (UINT8)( param1 - 1 );
 			}
-	
+
 			break;
-	
+
 		case MASMW_LED_DIRECT:
-	
+
 			if ( param1 > MASMW_MAX_LED_DIRECT ) return MASMW_ERROR_ARGUMENT;
-	
+
 			if ( ma_led_info.ctrl == 1 )
 			{
 				ma_led_info.dsw = param1;
 			}
-	
+
 			break;
 		}
-	
+
 		switch ( ma_led_info.ctrl )
 		{
 		case 0:		mode = ma_led_info.ctrl;	break;		/* OFF */
@@ -5763,7 +5763,7 @@ SINT32 MaSndDrv_DeviceControl
 										  ma_led_info.dsw,			/* led */
 										  ma_led_info.freq,		/* freq */
 										  mode );					/* mode */
-	
+
 		if ( ma_led_info.ctrl == 1 )
 		{
 			result = MaDevDrv_SendDirectPacket( led_on, 3 );
@@ -5774,7 +5774,7 @@ SINT32 MaSndDrv_DeviceControl
 		switch ( cmd )
 		{
 		case MASMW_MTR_MASTER:
-		
+
 			if ( param1 > MASMW_MAX_MTR_MASTER ) return MASMW_ERROR_ARGUMENT;
 
 			ma_mtr_info.ctrl = param1;
@@ -5783,18 +5783,18 @@ SINT32 MaSndDrv_DeviceControl
 			{
 			case 0:		ma_mtr_info.dsw = 0;	break;		/* OFF */
 			case 1:		ma_mtr_info.dsw = 0;	break;		/* direct */
-			case 2:		
+			case 2:
 				ma_mtr_info.dsw = 1;						/* sequence */
 				result = MaDevDrv_SendDirectPacket( mtr_off, 3 );
 				break;
 			}
 
 			break;
-	
+
 		case MASMW_MTR_BLINK:
 
 			if ( param1 > MASMW_MAX_MTR_BLINK ) return MASMW_ERROR_ARGUMENT;
-	
+
 			if ( param1 == 0 )
 			{
 				ma_mtr_info.blink = 4;
@@ -5804,13 +5804,13 @@ SINT32 MaSndDrv_DeviceControl
 				ma_mtr_info.blink = 5;
 				ma_mtr_info.freq = (UINT8)( param1 - 1 );
 			}
-	
+
 			break;
-	
+
 		case MASMW_MTR_DIRECT:
-	
+
 			if ( param1 > MASMW_MAX_MTR_DIRECT ) return MASMW_ERROR_ARGUMENT;
-	
+
 			if ( ma_mtr_info.ctrl == 1 )
 			{
 				ma_mtr_info.dsw = param1;
@@ -5818,7 +5818,7 @@ SINT32 MaSndDrv_DeviceControl
 
 			break;
 		}
-	
+
 		switch ( ma_mtr_info.ctrl )
 		{
 		case 0:		mode = ma_mtr_info.ctrl;	break;		/* OFF */
@@ -5830,7 +5830,7 @@ SINT32 MaSndDrv_DeviceControl
 										  ma_mtr_info.dsw,
 										  ma_mtr_info.freq,
 										  mode );
-	
+
 		if ( ma_mtr_info.ctrl == 1 )
 		{
 			result = MaDevDrv_SendDirectPacket( mtr_on, 3 );
@@ -5944,7 +5944,7 @@ SINT32 MaSndDrv_Initialize(void)
 			ma_stream_info[seq_id][i].frequency = (UINT32)0;
 		}
 	}
-	
+
 	for ( ch = 0; ch < MASMW_NUM_CHANNEL; ch++ )
 	{
 		if ( seq_id == MASMW_SEQTYPE_DIRECT )
@@ -5973,3 +5973,202 @@ SINT32 MaSndDrv_Initialize(void)
 
 	return MASMW_SUCCESS;
 }
+
+
+
+
+/****************************************************************************
+ *	MaSndDrv_Opl2NoteOn
+ *
+ *	Description:
+ *			OPL2 note On prcessing
+ *	Argument:
+ *			ch			channel number (0..15)
+ *          voiceData   MA3 2 OP voice data (converted from OPL 2)
+ *	Return:
+ *			Number of byte data of created packet
+ *
+ ****************************************************************************/
+
+SINT32 MaSndDrv_Opl2NoteOn
+(
+	UINT32	slot_no,					// channel number, originally for MA3 we had 0..15/31, 32..39, 40..41
+    UINT8 * voiceData                   // pitch + MA3 2OP block
+)
+{
+	UINT8	vo_volume = 127;			/* voice volume */
+	UINT32	num = 0;					/* number of packet data */
+	UINT32	reg_index;					/* register index */
+	UINT32	pitch;						/* pitch */
+	SINT32	result;						/* result of function */
+
+    UINT8	seq_id = 0;				    /* sequence id */
+
+	MASNDDRV_DBGMSG((" MaSndDrv_Opl2NoteOn: ch=%ld\n", slot_no));
+
+	/* check arguments */
+	MASMW_ASSERT( slot_no <= MASMW_MAX_CHANNEL );
+
+	/* set register index value and pitch of slot */
+	if ( slot_no < 16 )
+	{
+		reg_index = (UINT32)(((slot_no -  0) * 6) + MA_FM_VOICE_ADDRESS);
+		pitch = (voiceData[1] << 8 ) | voiceData[0];
+	}
+/*
+	else if ( slot_no < 32 )
+	{
+		reg_index = (UINT32)(((slot_no - 16) * 6) + MA_EXT_FM_VOICE_ADDRESS);
+		pitch = GetFmBlockFnum( seq_id, (UINT8)ch, key, voice_info.key );
+		vo_volume = CalcVoiceVolume( seq_id, velocity, 0 );
+	}
+	else if ( slot_no < 40 )
+	{
+		reg_index = (UINT32)(((slot_no - 32) * 6) + MA_WT_VOICE_ADDRESS);
+		pitch = GetWtBlockFnum( seq_id, (UINT8)ch, key, voice_info.key );
+		vo_volume = CalcVoiceVolume( seq_id, velocity, (12 << 1) );
+	}
+*/
+
+	/* Upload voice to internal RAM */
+
+    uint32_t ramAddr = MA_RAM_START_ADDRESS + slot_no * MA3_2OP_VOICE_PARAM_SIZE;
+    MaDevDrv_SendDirectRamData(ramAddr, 0, & voiceData[2], MA3_2OP_VOICE_PARAM_SIZE);
+
+    /* Create packet data */
+
+    /* KeyOn */
+    reg_index += 5;
+    MAKE_ADDRESS_PART( seq_id, num, reg_index )
+    MAKE_RST( seq_id, num, slot_no )
+    MAKE_NOP( seq_id, num, (UINT16)MA_NOP_2 )
+    reg_index -= 5;
+
+    MAKE_ADDRESS_PART( seq_id, num, reg_index )
+    MAKE_KEY_ON( seq_id, num, ramAddr, vo_volume, pitch, slot_no )
+
+	/* Send packet data */
+    result = MaDevDrv_SendDirectPacket( &packet_buf[seq_id][0], num );  // direct command
+
+	return result;
+}
+
+/****************************************************************************
+ *	MaSndDrv_Opl2PitchBend
+ *	Description:
+ *			OPL2 pitch bend
+ *	Argument:
+ *			ch			channel number (0..15)
+ *          voiceData   just pitch
+ *	Return:
+ *			Number of byte data of created packet
+ *
+ ****************************************************************************/
+
+SINT32 MaSndDrv_Opl2PitchBend
+(
+	UINT32	slot_no,					// channel number, originally for MA3 we had 0..15/31, 32..39, 40..41
+    UINT8 * voiceData                   // pitch (as in MaSndDrv_Opl2NoteOn)
+)
+{
+	UINT32	num = 0;					/* number of packet data */
+	UINT32	reg_index;					/* register index */
+	UINT32	pitch;						/* pitch */
+	SINT32	result;						/* result of function */
+
+    UINT8	seq_id = 0;				    /* sequence id */
+
+	MASNDDRV_DBGMSG((" MaSndDrv_Opl2PitchBend: ch=%ld\n", slot_no));
+
+	/* check arguments */
+	MASMW_ASSERT( slot_no <= MASMW_MAX_CHANNEL );
+
+	/* set register index value and pitch of slot */
+	if ( slot_no < 16 )
+	{
+		reg_index = (UINT32)(((slot_no -  0) * 6) + MA_FM_VOICE_ADDRESS);
+		pitch = (voiceData[1] << 8 ) | voiceData[0]; // GetFmBlockFnum( seq_id, (UINT8)ch, key, voice_info.key );   // from OPL2 ?
+	}
+/*
+	else if ( slot_no < 32 )
+	{
+		reg_index = (UINT32)(((slot_no - 16) * 6) + MA_EXT_FM_VOICE_ADDRESS);
+		pitch = GetFmBlockFnum( seq_id, (UINT8)ch, key, voice_info.key );
+	}
+	else if ( slot_no < 40 )
+	{
+		reg_index = (UINT32)(((slot_no - 32) * 6) + MA_WT_VOICE_ADDRESS);
+		pitch = GetWtBlockFnum( seq_id, (UINT8)ch, key, voice_info.key );
+	}
+*/
+	/* Create packet data */
+
+    /* velocity & pitch */
+    reg_index += 2;
+    MAKE_ADDRESS_PART( seq_id, num, reg_index )
+    MAKE_VEL_PITCH( seq_id, num, 127, pitch )
+
+
+	/* Send packet data */
+    result = MaDevDrv_SendDirectPacket( &packet_buf[seq_id][0], num );  // direct command
+
+	return result;
+}
+
+
+/****************************************************************************
+ *	MaSndDrv_Opl2NoteOff
+ *
+ *	Description:
+ *			OPL2 note Off processing
+ *	Arguments:
+ *			ch			channel number (0..8)
+ *	Return:
+ *			0			success
+ *			< 0			error code
+ *
+ ****************************************************************************/
+SINT32 MaSndDrv_Opl2NoteOff
+(
+	UINT32	slot_no						/* channel number */
+)
+{
+    UINT32	num = 0;					/* number of packet data */
+	UINT32	reg_index;					/* register index number */
+	SINT32	result;						/* result of function */
+
+	UINT8	seq_id = 0;				    /* sequence id */
+
+	MASNDDRV_DBGMSG((" MaSndDrv_Opl2NoteOff ch=%ld\n", slot_no));
+
+	/* check arguments */
+	MASMW_ASSERT( slot_no <= MASMW_MAX_CHANNEL );
+
+	if ( slot_no < 16 )
+	{
+		reg_index = (UINT32)(((slot_no -  0) * 6) + MA_FM_VOICE_ADDRESS);
+	}
+/*
+	else if ( slot_no < 32 )
+	{
+		reg_index = (UINT32)(((slot_no - 16) * 6) + MA_EXT_FM_VOICE_ADDRESS);
+	}
+	else if ( slot_no < 40 )
+	{
+		reg_index = (UINT32)(((slot_no - 32) * 6) + MA_WT_VOICE_ADDRESS);
+	}
+*/
+
+	/* Create packet data */
+
+	/* KeyOff */
+	reg_index += 5;
+	MAKE_ADDRESS_PART( seq_id, num, reg_index )
+	MAKE_KEY_OFF( seq_id, num, slot_no )
+
+	/* Send packet data */
+    result = MaDevDrv_SendDirectPacket( &packet_buf[seq_id][0], num );  // direct command
+
+	return result;
+}
+
