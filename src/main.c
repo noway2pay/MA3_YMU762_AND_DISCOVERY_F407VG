@@ -8,7 +8,7 @@
 
 #include "mamachdep.h"
 #include "masound.h"
-//#include "madevdrv.h"
+#include "madefs.h"
 
 
 
@@ -184,28 +184,35 @@ int main(void)
 
 extern SINT32 MaSndDrv_Opl2NoteOn
 (
-	UINT32	ch,							/* channel number */
+	UINT32	slot_no,					// channel number, originally for MA3 we had 0..15/31, 32..39, 40..41
+	UINT16  instrumentNr,               // instrument number (index to the instrument table)
     UINT8 * voiceData                   // pitch + MA3 2OP block
+
 );
 
 extern SINT32 MaSndDrv_Opl2PitchBend
 (
-	UINT32	ch,							/* channel number */
+	UINT32	ch,							// channel number
     UINT8 * voiceData                   // pitch
 );
 
 extern SINT32 MaSndDrv_Opl2NoteOff
 (
-	UINT32	ch							/* channel number */
+	UINT32	ch							// channel number
 );
 
 
 
 
+const char MAGIC_WORD_FOR_INSTRUMENTS[] = "MA3v01";
+const char MAGIC_WORD_FOR_NR_OF_OPS = 0x02;
 
-#define DRO Edlib_000_dro
+//#define DRO Edlib_000_dro
+#define DRO First_Interstellar_Wait
 
-#include "dro.h"
+
+#include "DRO.h"
+
 
 int main(void)
 {
@@ -280,6 +287,29 @@ int main(void)
     uint8_t * DRO_ptr = (uint8_t*)(DRO);
     uint8_t * DRO_end_ptr = (uint8_t*)(DRO) + DRO_size;
 
+    int haveInstrumentTable = 0;
+
+
+    // if new format - push the instrument table to RAM
+    if((memcmp(DRO_ptr,MAGIC_WORD_FOR_INSTRUMENTS,sizeof(MAGIC_WORD_FOR_INSTRUMENTS)-1) == 0) && (DRO_ptr[sizeof(MAGIC_WORD_FOR_INSTRUMENTS)-1] == MAGIC_WORD_FOR_NR_OF_OPS)) {
+        haveInstrumentTable = 1;
+
+        DRO_ptr += sizeof(MAGIC_WORD_FOR_INSTRUMENTS); // skip header to get number of instruments
+
+        uint16_t nrOfInstruments = (DRO_ptr[1] << 8) | DRO_ptr[0];
+        uint32_t ramAddr = MA_RAM_START_ADDRESS;
+
+        DRO_ptr += 2;                                  // skip number of instruments to get MA3 2OP instrument definitions
+
+        for(int i=0; i<nrOfInstruments; i++) {
+            MaDevDrv_SendDirectRamData(ramAddr, 0, DRO_ptr, MA3_2OP_VOICE_PARAM_SIZE);
+            ramAddr += MA3_2OP_VOICE_PARAM_SIZE;
+            DRO_ptr += MA3_2OP_VOICE_PARAM_SIZE;
+
+            dumpYamDebugToUsb();
+        }
+    }
+
     uint16_t DRO_delay;
     uint32_t DRO_nextEventTick;
     uint32_t tick;
@@ -290,7 +320,6 @@ int main(void)
     while (1)
     {
 
-        DRO_ptr = (uint8_t*)(DRO);
         DRO_nextEventTick =  0;
 
         while(DRO_ptr < DRO_end_ptr)
@@ -313,16 +342,26 @@ int main(void)
             if (channel & 0x80)
             {
                 channel &= 0x0F;
-                MaSndDrv_Opl2NoteOn(channel, & DRO_ptr[3]);
 
-                DRO_ptr += (2 + MA3_2OP_VOICE_PARAM_SIZE);      // + pitch (2) + voice data
+                if (haveInstrumentTable) {
+                    uint16_t pitch = (DRO_ptr[4] << 8) | DRO_ptr[3];
+                    uint16_t instrument = (DRO_ptr[6] << 8) | DRO_ptr[5];
+
+                    MaSndDrv_Opl2NoteOn(channel, instrument, NULL);
+                    DRO_ptr += (2 + 2);                             // + pitch (2) + instrument nr (2)
+
+
+                } else {
+                    MaSndDrv_Opl2NoteOn(channel, 0, & DRO_ptr[3]);
+                    DRO_ptr += (2 + MA3_2OP_VOICE_PARAM_SIZE);      // + pitch (2) + voice data
+                }
             }
             else if ((channel & 0x40) == 0x40)
             {
                 channel &= 0x0F;
                 MaSndDrv_Opl2PitchBend(channel, & DRO_ptr[3]);
 
-                DRO_ptr += (2);                                 // + pitch (2)
+                DRO_ptr += (2);                                     // + pitch (2)
             }
             else if ((channel & 0x80) == 0)
             {
@@ -330,7 +369,7 @@ int main(void)
                 MaSndDrv_Opl2NoteOff(channel);
             }
 
-            DRO_ptr += (2 + 1);                                 // delay (2) + channel (1) - common for Note on and Note offs
+            DRO_ptr += (2 + 1);                                     // delay (2) + channel (1) - common for Note on and Note offs
 
 
         }

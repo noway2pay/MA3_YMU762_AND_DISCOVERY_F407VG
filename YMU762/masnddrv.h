@@ -414,8 +414,10 @@ void   MaSndDrv_UpdatePos		( SINT32 id, UINT8 ctrl );
 
 SINT32 MaSndDrv_Opl2NoteOn
 (
-	UINT32	ch,							/* channel number */
+	UINT32	slot_no,					// channel number, originally for MA3 we had 0..15/31, 32..39, 40..41
+	UINT16  instrumentNr,               // instrument number (index to the instrument table)
     UINT8 * voiceData                   // pitch + MA3 2OP block
+
 );
 
 SINT32 MaSndDrv_Opl2PitchBend

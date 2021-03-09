@@ -5981,10 +5981,12 @@ SINT32 MaSndDrv_Initialize(void)
  *	MaSndDrv_Opl2NoteOn
  *
  *	Description:
- *			OPL2 note On prcessing
+ *			OPL2 note On processing, either with voiceData or with instrument number
  *	Argument:
- *			ch			channel number (0..15)
- *          voiceData   MA3 2 OP voice data (converted from OPL 2)
+ *			ch			    channel number (0..15)
+ *          voiceData       MA3 2 OP voice data (converted from OPL 2)
+ *          instrumentNr    instrument number (index to the instrument table)
+ *
  *	Return:
  *			Number of byte data of created packet
  *
@@ -5993,7 +5995,9 @@ SINT32 MaSndDrv_Initialize(void)
 SINT32 MaSndDrv_Opl2NoteOn
 (
 	UINT32	slot_no,					// channel number, originally for MA3 we had 0..15/31, 32..39, 40..41
+	UINT16  instrumentNr,               // instrument number (index to the instrument table)
     UINT8 * voiceData                   // pitch + MA3 2OP block
+
 )
 {
 	UINT8	vo_volume = 127;			/* voice volume */
@@ -6004,7 +6008,7 @@ SINT32 MaSndDrv_Opl2NoteOn
 
     UINT8	seq_id = 0;				    /* sequence id */
 
-	MASNDDRV_DBGMSG((" MaSndDrv_Opl2NoteOn: ch=%ld\n", slot_no));
+	MASNDDRV_DBGMSG((" MaSndDrv_Opl2NoteOn: ch=%ld ins:%d\n", slot_no, instrumentNr));
 
 	/* check arguments */
 	MASMW_ASSERT( slot_no <= MASMW_MAX_CHANNEL );
@@ -6029,11 +6033,16 @@ SINT32 MaSndDrv_Opl2NoteOn
 		vo_volume = CalcVoiceVolume( seq_id, velocity, (12 << 1) );
 	}
 */
+    uint32_t ramAddr;
 
-	/* Upload voice to internal RAM */
-
-    uint32_t ramAddr = MA_RAM_START_ADDRESS + slot_no * MA3_2OP_VOICE_PARAM_SIZE;
-    MaDevDrv_SendDirectRamData(ramAddr, 0, & voiceData[2], MA3_2OP_VOICE_PARAM_SIZE);
+    if(voiceData!=NULL) {
+        // Upload voice to internal RAM
+        ramAddr = MA_RAM_START_ADDRESS + slot_no * MA3_2OP_VOICE_PARAM_SIZE;
+        MaDevDrv_SendDirectRamData(ramAddr, 0, & voiceData[2], MA3_2OP_VOICE_PARAM_SIZE);
+    } else {
+        // point to instrument table (already in RAM)
+        ramAddr = MA_RAM_START_ADDRESS + instrumentNr * MA3_2OP_VOICE_PARAM_SIZE;
+    }
 
     /* Create packet data */
 
