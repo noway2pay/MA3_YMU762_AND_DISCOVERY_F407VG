@@ -186,8 +186,8 @@ extern SINT32 MaSndDrv_Opl2NoteOn
 (
 	UINT32	slot_no,					// channel number, originally for MA3 we had 0..15/31, 32..39, 40..41
 	UINT16  instrumentNr,               // instrument number (index to the instrument table)
+    UINT32  pitchParam,                 // pitch passed when using instruments
     UINT8 * voiceData                   // pitch + MA3 2OP block
-
 );
 
 extern SINT32 MaSndDrv_Opl2PitchBend
@@ -201,7 +201,13 @@ extern SINT32 MaSndDrv_Opl2NoteOff
 	UINT32	ch							// channel number
 );
 
-
+extern SINT32 MaDevDrv_SendDirectRamData
+(
+	UINT32	address,					/* address of internal ram */
+	UINT8	data_type,					/* type of data */
+	const UINT8 * data_ptr,				/* pointer to data */
+	UINT32	data_size					/* size of data */
+);
 
 
 const char MAGIC_WORD_FOR_INSTRUMENTS[] = "MA3v01";
@@ -306,9 +312,11 @@ int main(void)
             ramAddr += MA3_2OP_VOICE_PARAM_SIZE;
             DRO_ptr += MA3_2OP_VOICE_PARAM_SIZE;
 
-            dumpYamDebugToUsb();
+            //dumpYamDebugToUsb();
         }
     }
+
+    uint8_t * DRO_ptr_notes_start = DRO_ptr;
 
     uint16_t DRO_delay;
     uint32_t DRO_nextEventTick;
@@ -321,10 +329,11 @@ int main(void)
     {
 
         DRO_nextEventTick =  0;
+        DRO_ptr = DRO_ptr_notes_start;
 
         while(DRO_ptr < DRO_end_ptr)
         {
-            dumpYamDebugToUsb();
+            //dumpYamDebugToUsb();
             //dumpEventsToUsb();
 
             tick = HAL_GetTick();
@@ -347,12 +356,12 @@ int main(void)
                     uint16_t pitch = (DRO_ptr[4] << 8) | DRO_ptr[3];
                     uint16_t instrument = (DRO_ptr[6] << 8) | DRO_ptr[5];
 
-                    MaSndDrv_Opl2NoteOn(channel, instrument, NULL);
+                    MaSndDrv_Opl2NoteOn(channel, instrument, pitch, NULL);
                     DRO_ptr += (2 + 2);                             // + pitch (2) + instrument nr (2)
 
 
                 } else {
-                    MaSndDrv_Opl2NoteOn(channel, 0, & DRO_ptr[3]);
+                    MaSndDrv_Opl2NoteOn(channel, 0, 0, & DRO_ptr[3]);
                     DRO_ptr += (2 + MA3_2OP_VOICE_PARAM_SIZE);      // + pitch (2) + voice data
                 }
             }
@@ -375,7 +384,8 @@ int main(void)
         }
 
         while(! BUTTON_PRESSED);
-        HAL_Delay(1000);
+        HAL_Delay(2000);
+
     }
 
 

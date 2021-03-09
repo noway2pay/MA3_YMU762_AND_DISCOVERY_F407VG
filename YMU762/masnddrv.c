@@ -5996,8 +5996,8 @@ SINT32 MaSndDrv_Opl2NoteOn
 (
 	UINT32	slot_no,					// channel number, originally for MA3 we had 0..15/31, 32..39, 40..41
 	UINT16  instrumentNr,               // instrument number (index to the instrument table)
+    UINT32  pitchParam,                 // pitch passed when using instruments
     UINT8 * voiceData                   // pitch + MA3 2OP block
-
 )
 {
 	UINT8	vo_volume = 127;			/* voice volume */
@@ -6017,7 +6017,14 @@ SINT32 MaSndDrv_Opl2NoteOn
 	if ( slot_no < 16 )
 	{
 		reg_index = (UINT32)(((slot_no -  0) * 6) + MA_FM_VOICE_ADDRESS);
-		pitch = (voiceData[1] << 8 ) | voiceData[0];
+
+		if (voiceData != NULL) {
+            pitch = (voiceData[1] << 8 ) | voiceData[0];
+		} else {
+            pitch = pitchParam;
+		}
+
+
 	}
 /*
 	else if ( slot_no < 32 )
@@ -6035,7 +6042,7 @@ SINT32 MaSndDrv_Opl2NoteOn
 */
     uint32_t ramAddr;
 
-    if(voiceData!=NULL) {
+    if (voiceData != NULL) {
         // Upload voice to internal RAM
         ramAddr = MA_RAM_START_ADDRESS + slot_no * MA3_2OP_VOICE_PARAM_SIZE;
         MaDevDrv_SendDirectRamData(ramAddr, 0, & voiceData[2], MA3_2OP_VOICE_PARAM_SIZE);
