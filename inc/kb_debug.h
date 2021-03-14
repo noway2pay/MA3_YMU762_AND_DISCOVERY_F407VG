@@ -123,7 +123,7 @@ void initializeEventsLog(void);
 #define dumpEventsToUsb()
 #define dumpYamDebugToUsb(void)
 
-#define yamDebugPutSimpleLine(char * lineData)
+#define yamDebugPutSimpleLine(lineData)
 
 #define initializeYamDebug(void)
 #define initializeEventsLog(void)

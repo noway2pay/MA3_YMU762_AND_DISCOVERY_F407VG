@@ -214,11 +214,14 @@ const char MAGIC_WORD_FOR_INSTRUMENTS[] = "MA3v01";
 const char MAGIC_WORD_FOR_NR_OF_OPS = 0x02;
 
 //#define DRO Edlib_000_dro
-#define DRO First_Interstellar_Wait
-
+//#define DRO First_Interstellar_Wait
+// #define DRO Sulfo12_first_subtune_channels_1_7
+//#define DRO Sulfo12_first_subtune_channel_1_7_octave_up
+#define DRO Sulfo12_first_subtune_channel_1_7_with_Yamaha_pitch_table
 
 #include "DRO.h"
 
+#define EXECUTE_PITCH_BEND
 
 int main(void)
 {
@@ -282,10 +285,12 @@ int main(void)
     MaSound_Control(func,file,MASMW_SET_VOLUME,&volume,NULL);
 
     while(! BUTTON_PRESSED);
-    HAL_Delay(1000);
+    HAL_Delay(3000);
 
     setTickFirst(HAL_GetTick());
     AddEventToBuffer_SpecialFlag(LOGMA3_START);
+
+    dumpYamDebugToUsb();
 
     //MaSound_Start(func,file,0,NULL);    // Play once, loop -> change play_mode to 0
 
@@ -312,7 +317,7 @@ int main(void)
             ramAddr += MA3_2OP_VOICE_PARAM_SIZE;
             DRO_ptr += MA3_2OP_VOICE_PARAM_SIZE;
 
-            //dumpYamDebugToUsb();
+            dumpYamDebugToUsb();
         }
     }
 
@@ -323,6 +328,8 @@ int main(void)
     uint32_t tick;
 
     int8_t channel;
+    int8_t channelReal;
+    int8_t skip;
 
 
     while (1)
@@ -334,7 +341,7 @@ int main(void)
         while(DRO_ptr < DRO_end_ptr)
         {
             //dumpYamDebugToUsb();
-            //dumpEventsToUsb();
+            dumpEventsToUsb();
 
             tick = HAL_GetTick();
 
@@ -348,6 +355,29 @@ int main(void)
 
             channel = DRO_ptr[2];
 
+            channelReal = channel & 0x0F;
+            skip = 0;
+
+# if 0
+            switch(channelReal){
+                case 0:
+                case 1:
+                    skip = 0;
+                    break;
+
+                case 2:
+                case 3:
+                case 4:
+                case 5:
+                case 6:
+                case 7:
+                case 8:
+                    skip = 0;
+                    break;
+            }
+#endif
+
+
             if (channel & 0x80)
             {
                 channel &= 0x0F;
@@ -356,26 +386,40 @@ int main(void)
                     uint16_t pitch = (DRO_ptr[4] << 8) | DRO_ptr[3];
                     uint16_t instrument = (DRO_ptr[6] << 8) | DRO_ptr[5];
 
-                    MaSndDrv_Opl2NoteOn(channel, instrument, pitch, NULL);
+                    if(! skip) {
+                        MaSndDrv_Opl2NoteOn(channel, instrument, pitch, NULL);
+                    }
+
                     DRO_ptr += (2 + 2);                             // + pitch (2) + instrument nr (2)
 
 
                 } else {
-                    MaSndDrv_Opl2NoteOn(channel, 0, 0, & DRO_ptr[3]);
+                    if(! skip) {
+                        MaSndDrv_Opl2NoteOn(channel, 0, 0, & DRO_ptr[3]);
+                    }
+
                     DRO_ptr += (2 + MA3_2OP_VOICE_PARAM_SIZE);      // + pitch (2) + voice data
                 }
             }
             else if ((channel & 0x40) == 0x40)
             {
+#ifdef EXECUTE_PITCH_BEND
                 channel &= 0x0F;
-                MaSndDrv_Opl2PitchBend(channel, & DRO_ptr[3]);
+
+                if(! skip) {
+                    MaSndDrv_Opl2PitchBend(channel, & DRO_ptr[3]);
+                }
+#endif
 
                 DRO_ptr += (2);                                     // + pitch (2)
             }
             else if ((channel & 0x80) == 0)
             {
                 channel &= 0x0F;
-                MaSndDrv_Opl2NoteOff(channel);
+
+                if(! skip) {
+                    MaSndDrv_Opl2NoteOff(channel);
+                }
             }
 
             DRO_ptr += (2 + 1);                                     // delay (2) + channel (1) - common for Note on and Note offs
@@ -384,7 +428,7 @@ int main(void)
         }
 
         while(! BUTTON_PRESSED);
-        HAL_Delay(2000);
+        HAL_Delay(3000);
 
     }
 

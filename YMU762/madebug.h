@@ -13,7 +13,7 @@
 #ifndef __MADEBUG_H__
 #define __MADEBUG_H__
 
-#define DEBUG		(1)
+#define DEBUG		(0)
 #define	MASMW_DEBUG	(0)
 
 #if DEBUG

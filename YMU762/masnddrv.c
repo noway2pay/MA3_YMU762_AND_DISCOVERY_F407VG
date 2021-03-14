@@ -6008,7 +6008,7 @@ SINT32 MaSndDrv_Opl2NoteOn
 
     UINT8	seq_id = 0;				    /* sequence id */
 
-	MASNDDRV_DBGMSG((" MaSndDrv_Opl2NoteOn: ch=%ld ins:%d\n", slot_no, instrumentNr));
+	//MASNDDRV_DBGMSG((" MaSndDrv_Opl2NoteOn: ch=%ld ins:%d\n", slot_no, instrumentNr));
 
 	/* check arguments */
 	MASMW_ASSERT( slot_no <= MASMW_MAX_CHANNEL );
@@ -6023,8 +6023,6 @@ SINT32 MaSndDrv_Opl2NoteOn
 		} else {
             pitch = pitchParam;
 		}
-
-
 	}
 /*
 	else if ( slot_no < 32 )
@@ -6040,7 +6038,11 @@ SINT32 MaSndDrv_Opl2NoteOn
 		vo_volume = CalcVoiceVolume( seq_id, velocity, (12 << 1) );
 	}
 */
-    uint32_t ramAddr;
+
+	MASNDDRV_DBGMSG((" MaSndDrv_Opl2NoteOn: ch=%ld ins:%d p:$%04X\n", slot_no, instrumentNr, pitch));
+
+
+    UINT32 ramAddr;
 
     if (voiceData != NULL) {
         // Upload voice to internal RAM
@@ -6048,7 +6050,9 @@ SINT32 MaSndDrv_Opl2NoteOn
         MaDevDrv_SendDirectRamData(ramAddr, 0, & voiceData[2], MA3_2OP_VOICE_PARAM_SIZE);
     } else {
         // point to instrument table (already in RAM)
-        ramAddr = MA_RAM_START_ADDRESS + instrumentNr * MA3_2OP_VOICE_PARAM_SIZE;
+
+        // Now that's weird. But this is what Yamaha's middleware is doing - address is divided by 2 !!!
+        ramAddr = (MA_RAM_START_ADDRESS + instrumentNr * MA3_2OP_VOICE_PARAM_SIZE) >> 1;
     }
 
     /* Create packet data */
